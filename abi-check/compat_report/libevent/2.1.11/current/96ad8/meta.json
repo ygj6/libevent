@@ -1,0 +1,8 @@
+{
+  "Affected": "1",
+  "Added": 9,
+  "Removed": 0,
+  "TotalProblems": 12,
+  "Object1": "lib/libevent_extra-2.1.so.7.0.0",
+  "Object2": "lib/libevent_extra-2.2.so.1.0.0"
+}

@@ -1,0 +1,997 @@
+<!-- verdict:incompatible;affected:24.9;added:17;removed:0;type_problems_high:0;type_problems_medium:11;type_problems_low:5;interface_problems_high:1;interface_problems_medium:0;interface_problems_low:2;changed_constants:0;type_changes_other:7;tool_version:2.2 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="libevent-2.1, binary compatibility, API, report" />
+<meta name="description" content="Binary compatibility report for the libevent-2.1 object between 2.1.11 and current versions on x86_64" />
+<title>libevent-2.1: 2.1.11 to current binary compatibility report</title>
+<style type="text/css">
+body {
+    font-family:Arial, sans-serif;
+    background-color:White;
+    color:Black;
+}
+hr {
+    color:Black;
+    background-color:Black;
+    height:1px;
+    border:0;
+}
+h1 {
+    margin-bottom:0px;
+    padding-bottom:0px;
+    font-size:1.625em;
+}
+h2 {
+    margin-bottom:0px;
+    padding-bottom:0px;
+    font-size:1.25em;
+    white-space:nowrap;
+}
+span.section {
+    font-weight:bold;
+    cursor:pointer;
+    color:#003E69;
+    white-space:nowrap;
+    margin-left:0.3125em;
+}
+span.new_sign {
+    font-weight:bold;
+    margin-left:1.65em;
+    color:#003E69;
+}
+span.new_sign_lbl {
+    margin-left:3em;
+    font-size:1em;
+    color:Black;
+}
+span:hover.section {
+    color:#336699;
+}
+span.sect_aff {
+    cursor:pointer;
+    padding-left:1.55em;
+    font-size:0.875em;
+    color:#cc3300;
+}
+span.sect_info {
+    cursor:pointer;
+    padding-left:1.55em;
+    font-size:0.875em;
+    color:Black;
+}
+span.ext {
+    font-weight:normal;
+}
+span.h_name {
+    color:#cc3300;
+    font-size:0.875em;
+    font-weight:bold;
+}
+div.h_list, div.lib_list {
+    font-size:0.94em;
+    padding-left:0.4em;
+}
+span.ns {
+    color:#408080;
+    font-size:0.94em;
+}
+span.lib_name {
+    color:Green;
+    font-size:0.875em;
+    font-weight:bold;
+}
+span.iname {
+    font-weight:bold;
+    color:#003E69;
+    margin-left:0.3125em;
+}
+span.iname_b {
+    font-weight:bold;
+}
+span.iname_a {
+    color:#333333;
+    font-weight:bold;
+    font-size:0.94em;
+}
+span.sym_p {
+    font-weight:normal;
+    white-space:normal;
+}
+span.sym_pd {
+    white-space:normal;
+}
+span.sym_p span, span.sym_pd span {
+    white-space:nowrap;
+}
+div.affect {
+    padding-left:1em;
+    padding-bottom:10px;
+    font-size:0.87em;
+    font-style:italic;
+    line-height:0.9em;
+}
+div.affected {
+    padding-left:1.9em;
+    padding-top:10px;
+}
+table.ptable {
+    border-collapse:collapse;
+    border:1px outset black;
+    margin-left:0.95em;
+    margin-top:3px;
+    margin-bottom:3px;
+    width:56.25em;
+}
+table.ptable td {
+    border:1px solid gray;
+    padding:3px;
+    font-size:0.875em;
+    text-align:left;
+    vertical-align:top;
+    max-width:28em;
+    word-wrap:break-word;
+}
+table.ptable th.pn {
+    width:2%;
+}
+table.ptable th.chg {
+    width:47%;
+}
+table.vtable {
+    border-collapse:collapse;
+    border:1px outset black;
+    margin-left:1.9em;
+    margin-top:0.7em;
+}
+table.vtable td {
+    border:1px solid gray;
+    padding:3px;
+    font-size:0.875em;
+    vertical-align:top;
+    max-width:450px;
+    word-wrap:break-word;
+}
+table.ptable th, table.vtable th {
+    background-color:#eeeeee;
+    font-weight:bold;
+    color:#333333;
+    font-family:Verdana, Arial;
+    font-size:0.875em;
+    border:1px solid gray;
+    text-align:center;
+    vertical-align:top;
+    white-space:nowrap;
+    padding:3px;
+}
+table.summary {
+    border-collapse:collapse;
+    border:1px outset black;
+}
+table.summary th {
+    background-color:#eeeeee;
+    font-weight:normal;
+    text-align:left;
+    font-size:0.94em;
+    white-space:nowrap;
+    border:1px inset gray;
+    padding:3px;
+}
+table.summary td {
+    text-align:right;
+    white-space:nowrap;
+    border:1px inset gray;
+    padding:3px 5px 3px 10px;
+}
+span.mngl {
+    padding-left:1em;
+    font-size:0.875em;
+    cursor:text;
+    color:#444444;
+    font-weight:bold;
+}
+span.pleft {
+    padding-left:2.5em;
+}
+span.sym_ver {
+    color:#333333;
+    white-space:nowrap;
+    font-family:"DejaVu Sans Mono", Monospace;
+}
+span.attr {
+    color:#333333;
+    font-weight:normal;
+}
+span.color_p {
+    font-style:italic;
+    color:Brown;
+}
+span.p {
+    font-style:italic;
+}
+span.fp {
+    font-style:italic;
+    background-color:#DCDCDC;
+}
+span.ttype {
+    font-weight:normal;
+}
+span.nowrap {
+    white-space:nowrap;
+}
+span.value {
+    font-weight:bold;
+}
+.passed {
+    background-color:#CCFFCC;
+    font-weight:normal;
+}
+.warning {
+    background-color:#F4F4AF;
+    font-weight:normal;
+}
+.failed {
+    background-color:#FFCCCC;
+    font-weight:normal;
+}
+.new {
+    background-color:#C6DEFF;
+    font-weight:normal;
+}
+.compatible {
+    background-color:#CCFFCC;
+    font-weight:normal;
+}
+.almost_compatible {
+    background-color:#FFDAA3;
+    font-weight:normal;
+}
+.incompatible {
+    background-color:#FFCCCC;
+    font-weight:normal;
+}
+.gray {
+    background-color:#DCDCDC;
+    font-weight:normal;
+}
+.top_ref {
+    font-size:0.69em;
+}
+.footer {
+    font-size:0.75em;
+}
+</style>
+<script type="text/javascript" language="JavaScript">
+<!--
+function showContent(header, id)
+{
+    e = document.getElementById(id);
+    if(e.style.display == 'none')
+    {
+        e.style.display = 'block';
+        e.style.visibility = 'visible';
+        header.innerHTML = header.innerHTML.replace(/\[[^0-9 ]\]/gi,"[&minus;]");
+    }
+    else
+    {
+        e.style.display = 'none';
+        e.style.visibility = 'hidden';
+        header.innerHTML = header.innerHTML.replace(/\[[^0-9 ]\]/gi,"[+]");
+    }
+}
+-->
+</script>
+</head>
+
+<body>
+<div><a name='Top'></a>
+<h1>Binary compatibility report between <span style='color:Blue;'>libevent-2.1.so.7.0.0</span> (<span style='color:Red;'>2.1.11</span>) and <span style='color:Blue;'>libevent-2.2.so.1.0.0</span> (<span style='color:Red;'>current</span>) objects on <span style='color:Blue;'>x86_64</span></h1>
+
+<h2>Test Info</h2><hr/>
+<table class='summary'>
+<tr><th>Module Name</th><td>libevent-2.1</td></tr>
+<tr><th>Version #1</th><td>2.1.11</td></tr>
+<tr><th>Version #2</th><td>current</td></tr>
+<tr><th>Arch</th><td>x86_64</td></tr>
+<tr><th>GCC Version</th><td>7.4.0</td></tr>
+</table>
+<h2>Test Results</h2><hr/>
+<table class='summary'><tr><th>Total Header Files</th><td><a href='#Headers' style='color:Blue;'>21</a></td></tr>
+<tr><th>Total Source Files</th><td><a href='#Sources' style='color:Blue;'>17</a></td></tr>
+<tr><th>Total Objects</th><td><a href='#Libs' style='color:Blue;'>1</a></td></tr>
+<tr><th>Total Symbols / Types</th><td>447 / 124</td></tr>
+<tr><th>Compatibility</th>
+<td class='incompatible'>75.1%</td>
+</tr>
+</table>
+<h2>Problem Summary</h2><hr/>
+<table class='summary'><tr><th></th><th style='text-align:center;'>Severity</th><th style='text-align:center;'>Count</th></tr><tr><th>Added Symbols</th><td>-</td><td class='new'><a href='#Added' style='color:Blue;'>17</a></td></tr>
+<tr><th>Removed Symbols</th><td>High</td><td>0</td></tr>
+<tr><th rowspan='3'>Problems with<br/>Data Types</th><td>High</td><td>0</td></tr>
+<tr><td>Medium</td><td class='failed'><a href='#Type_Problems_Medium' style='color:Blue;'>11</a></td></tr>
+<tr><td>Low</td><td class='warning'><a href='#Type_Problems_Low' style='color:Blue;'>5</a></td></tr>
+<tr><th rowspan='3'>Problems with<br/>Symbols</th><td>High</td><td class='failed'><a href='#Symbol_Problems_High' style='color:Blue;'>1</a></td></tr>
+<tr><td>Medium</td><td>0</td></tr>
+<tr><td>Low</td><td class='warning'><a href='#Symbol_Problems_Low' style='color:Blue;'>2</a></td></tr>
+<tr><th>Problems with<br/>Constants</th><td>Low</td><td>0</td></tr>
+<tr><th>Other Changes<br/>in Data Types</th><td>-</td><td class='passed'><a href='#Other_Changes_In_Types' style='color:Blue;'>7</a></td></tr>
+</table>
+
+<a name='Added'></a><h2>Added Symbols <span class='new'>&nbsp;17&nbsp;</span></h2><hr/>
+<span class='h_name'>buffer.h</span>, <span class='lib_name'>libevent-2.2.so.1.0.0</span><br/>
+<span class="iname">evbuffer_get_max_read&#160;<span class='sym_p'><span>(&#160;struct evbuffer* <span class='color_p'>buf</span></span>&#160;)</span></span><br/>
+<span class="iname">evbuffer_set_max_read&#160;<span class='sym_p'><span>(&#160;struct evbuffer* <span class='color_p'>buf</span></span>, <span>size_t <span class='color_p'>max</span></span>&#160;)</span></span><br/>
+<br/>
+<span class='h_name'>bufferevent.h</span>, <span class='lib_name'>libevent-2.2.so.1.0.0</span><br/>
+<span class="iname">bufferevent_socket_connect_hostname_hints&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='color_p'>bev</span></span>, <span>struct evdns_base* <span class='color_p'>evdns_base</span></span>, <span>struct addrinfo const* <span class='color_p'>hints_in</span></span>, <span>char const* <span class='color_p'>hostname</span></span>, <span>int <span class='color_p'>port</span></span>&#160;)</span></span><br/>
+<br/>
+<span class='h_name'>http.h</span>, <span class='lib_name'>libevent-2.2.so.1.0.0</span><br/>
+<span class="iname">evhttp_connection_set_connect_timeout_tv&#160;<span class='sym_p'><span>(&#160;struct evhttp_connection* <span class='color_p'>evcon</span></span>, <span>struct timeval const* <span class='color_p'>tv</span></span>&#160;)</span></span><br/>
+<span class="iname">evhttp_connection_set_ext_method_cmp&#160;<span class='sym_p'><span>(&#160;struct evhttp_connection* <span class='color_p'>evcon</span></span>, <span>evhttp_ext_method_cb <span class='color_p'>cmp</span></span>&#160;)</span></span><br/>
+<span class="iname">evhttp_connection_set_read_timeout_tv&#160;<span class='sym_p'><span>(&#160;struct evhttp_connection* <span class='color_p'>evcon</span></span>, <span>struct timeval const* <span class='color_p'>tv</span></span>&#160;)</span></span><br/>
+<span class="iname">evhttp_connection_set_write_timeout_tv&#160;<span class='sym_p'><span>(&#160;struct evhttp_connection* <span class='color_p'>evcon</span></span>, <span>struct timeval const* <span class='color_p'>tv</span></span>&#160;)</span></span><br/>
+<span class="iname">evhttp_parse_query_str_flags&#160;<span class='sym_p'><span>(&#160;char const* <span class='color_p'>uri</span></span>, <span>struct evkeyvalq* <span class='color_p'>headers</span></span>, <span>unsigned int <span class='color_p'>flags</span></span>&#160;)</span></span><br/>
+<span class="iname">evhttp_set_ext_method_cmp&#160;<span class='sym_p'><span>(&#160;struct evhttp* <span class='color_p'>http</span></span>, <span>evhttp_ext_method_cb <span class='color_p'>cmp</span></span>&#160;)</span></span><br/>
+<span class="iname">evhttp_set_newreqcb&#160;<span class='sym_p'><span>(&#160;struct evhttp* <span class='color_p'>http</span></span>, <span>int(*<span class='color_p'>cb</span>)(struct evhttp_request*, void*)</span>, <span>void* <span class='color_p'>cbarg</span></span>&#160;)</span></span><br/>
+<span class="iname">evhttp_set_read_timeout_tv&#160;<span class='sym_p'><span>(&#160;struct evhttp* <span class='color_p'>http</span></span>, <span>struct timeval const* <span class='color_p'>tv</span></span>&#160;)</span></span><br/>
+<span class="iname">evhttp_set_write_timeout_tv&#160;<span class='sym_p'><span>(&#160;struct evhttp* <span class='color_p'>http</span></span>, <span>struct timeval const* <span class='color_p'>tv</span></span>&#160;)</span></span><br/>
+<br/>
+<span class='h_name'>watch.h</span>, <span class='lib_name'>libevent-2.2.so.1.0.0</span><br/>
+<span class="iname">evwatch_base&#160;<span class='sym_p'><span>(&#160;struct evwatch* <span class='color_p'>watcher</span></span>&#160;)</span></span><br/>
+<span class="iname">evwatch_check_new&#160;<span class='sym_p'><span>(&#160;struct event_base* <span class='color_p'>base</span></span>, <span>evwatch_check_cb <span class='color_p'>callback</span></span>, <span>void* <span class='color_p'>arg</span></span>&#160;)</span></span><br/>
+<span class="iname">evwatch_free&#160;<span class='sym_p'><span>(&#160;struct evwatch* <span class='color_p'>watcher</span></span>&#160;)</span></span><br/>
+<span class="iname">evwatch_prepare_get_timeout&#160;<span class='sym_p'><span>(&#160;struct evwatch_prepare_cb_info const* <span class='color_p'>info</span></span>, <span>struct timeval* <span class='color_p'>timeout</span></span>&#160;)</span></span><br/>
+<span class="iname">evwatch_prepare_new&#160;<span class='sym_p'><span>(&#160;struct event_base* <span class='color_p'>base</span></span>, <span>evwatch_prepare_cb <span class='color_p'>callback</span></span>, <span>void* <span class='color_p'>arg</span></span>&#160;)</span></span><br/>
+<br/>
+<a class='top_ref' href='#Top'>to the top</a><br/>
+<a name='High_Risk_Problems'></a><a name='Symbol_Problems_High'></a><a name='Interface_Problems_High'></a>
+<h2>Problems with Symbols, High Severity <span class='failed'>&nbsp;1&nbsp;</span></h2><hr/>
+<span class='h_name'>http.h</span>, <span class='lib_name'>libevent-2.1.so.7.0.0</span><br/>
+<span class="section" onclick="javascript:showContent(this, 'c_1')">
+<span class='ext'>[+]</span> evhttp_set_allowed_methods&#160;<span class='sym_p'><span>(&#160;struct evhttp* <span class='color_p'>http</span></span>, <span>uint16_t <span class='color_p'>methods</span></span>&#160;)</span> <span class='failed'>&nbsp;1&nbsp;</span></span>
+<br/>
+<div id="c_1" style="display:none;">
+
+
+<span class='new_sign_lbl'>&#8675;</span>
+<br/>
+<span class='new_sign'>evhttp_set_allowed_methods&#160;<span class='sym_p'><span>(&#160;struct evhttp* <span class='color_p'>http</span></span>, <span>uint32_t <span class='color_p'>methods</span></span>&#160;)</span></span><br/>
+<table class='ptable'>
+<tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th>
+</tr>
+<tr>
+<th>1</th>
+<td>Type of <b>2nd</b> parameter <b>methods</b> has been changed from <span class='nowrap'><b>uint16_t</b> (<b>2</b> bytes)</span> to <span class='nowrap'><b>uint32_t</b> (<b>4</b> bytes)</span>.</td>
+<td>Layout of parameter's stack has been changed and therefore parameters at higher positions in the stack may be incorrectly initialized by applications.</td>
+</tr>
+</table>
+<br/>
+</div>
+<br/>
+<a class='top_ref' href='#Top'>to the top</a><br/>
+<a name='Medium_Risk_Problems'></a><a name='Type_Problems_Medium'></a>
+<h2>Problems with Data Types, Medium Severity <span class='failed'>&nbsp;11&nbsp;</span></h2><hr/>
+<span class='h_name'>buffer.h</span><br/>
+<span class="section" onclick="javascript:showContent(this, 'c_2')">
+<span class='ext'>[+]</span> <span class='ttype'>struct</span> evbuffer <span class='failed'>&nbsp;1&nbsp;</span></span>
+<br/>
+<div id="c_2" style="display:none;">
+<table class='ptable'><tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th></tr><tr>
+<th>1</th>
+<td>Field <b>max_read</b> has been added at the middle position of this structural type.</td>
+<td>1) Size of the inclusive type has been changed.<br/>2) Layout of structure fields has been changed and therefore fields at higher positions of the structure definition may be incorrectly accessed by applications.</td>
+</tr>
+</table>
+<span class="sect_aff" onclick="javascript:showContent(this, 'c_3')">
+[+] affected symbols: 155 (34.7%)</span>
+<div id="c_3" style="display:none;">
+<div class='affected'><span class='iname_a'>bufferevent_add_to_rate_limit_group&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>struct bufferevent_rate_limit_group* <i>g</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.input&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_base_set&#160;<span class='sym_p'><span>(&#160;struct event_base* <i>base</i></span>, <span>struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 2nd parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_decref&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_read_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.input&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_write_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.input&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_disable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_enable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_filter_new&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <i>underlying</i></span>, <span>bufferevent_filter_cb <span class='fp'>input_filter</span></span>, <span>bufferevent_filter_cb <i>output_filter</i></span>, <span>int <i>options</i></span>, <span>void(*<i>free_context</i>)(void*)</span>, <span>void* <i>ctx</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;input_filter.p0&#39; in 2nd parameter &#39;input_filter&#39; has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_flush&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>iotype</i></span>, <span>enum bufferevent_flush_mode <i>mode</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_free&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+ <b>...</b>
+<br/>
+</div>
+</div>
+<br/><br/></div>
+
+<br/>
+<span class='h_name'>bufferevent_struct.h</span><br/>
+<span class="section" onclick="javascript:showContent(this, 'c_4')">
+<span class='ext'>[+]</span> <span class='ttype'>struct</span> bufferevent <span class='failed'>&nbsp;2&nbsp;</span></span>
+<br/>
+<div id="c_4" style="display:none;">
+<table class='ptable'><tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th></tr><tr>
+<th>1</th>
+<td>Size of field <b>ev_read</b> has been changed from <b>128</b> bytes to <b>120</b> bytes.</td>
+<td>Previous accesses of applications and library functions to this field may be broken.</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Size of field <b>ev_write</b> has been changed from <b>128</b> bytes to <b>120</b> bytes.</td>
+<td>1) Size of the inclusive type has been changed.<br/>2) Previous accesses of applications and library functions to this field and fields at higher positions of the structure definition may be broken.</td>
+</tr>
+</table>
+<span class="sect_aff" onclick="javascript:showContent(this, 'c_5')">
+[+] affected symbols: 56 (12.5%)</span>
+<div id="c_5" style="display:none;">
+<div class='affected'><span class='iname_a'>bufferevent_add_to_rate_limit_group&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>struct bufferevent_rate_limit_group* <i>g</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_base_set&#160;<span class='sym_p'><span>(&#160;struct event_base* <i>base</i></span>, <span>struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>2nd parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_decref&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_read_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_write_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_disable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_enable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_filter_new&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>underlying</span></span>, <span>bufferevent_filter_cb <i>input_filter</i></span>, <span>bufferevent_filter_cb <i>output_filter</i></span>, <span>int <i>options</i></span>, <span>void(*<i>free_context</i>)(void*)</span>, <span>void* <i>ctx</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;underlying&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_flush&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>iotype</i></span>, <span>enum bufferevent_flush_mode <i>mode</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_free&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+ <b>...</b>
+<br/>
+</div>
+</div>
+<br/><br/></div>
+
+<br/>
+<span class='h_name'>event.h</span><br/>
+<span class="section" onclick="javascript:showContent(this, 'c_6')">
+<span class='ext'>[+]</span> <span class='ttype'>struct</span> event_base <span class='failed'>&nbsp;3&nbsp;</span></span>
+<br/>
+<div id="c_6" style="display:none;">
+<table class='ptable'><tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th></tr><tr>
+<th>1</th>
+<td>Size of field <b>sig</b> has been changed from <b>160</b> bytes to <b>152</b> bytes.</td>
+<td>1) Size of the inclusive type has been changed.<br/>2) Previous accesses of applications and library functions to this field and fields at higher positions of the structure definition may be broken.</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Size of field <b>th_notify</b> has been changed from <b>128</b> bytes to <b>120</b> bytes.</td>
+<td>1) Size of the inclusive type has been changed.<br/>2) Previous accesses of applications and library functions to this field and fields at higher positions of the structure definition may be broken.</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Size of field <b>timeheap</b> has been changed from <b>16</b> bytes to <b>24</b> bytes.</td>
+<td>1) Size of the inclusive type has been changed.<br/>2) Previous accesses of applications and library functions to this field may be broken.</td>
+</tr>
+</table>
+<span class="sect_aff" onclick="javascript:showContent(this, 'c_7')">
+[+] affected symbols: 209 (46.8%)</span>
+<div id="c_7" style="display:none;">
+<div class='affected'><span class='iname_a'>bufferevent_add_to_rate_limit_group&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>struct bufferevent_rate_limit_group* <i>g</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_base_set&#160;<span class='sym_p'><span>(&#160;struct event_base* <span class='fp'>base</span></span>, <span>struct bufferevent* <i>bufev</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;base&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_decref&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_read_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_write_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_disable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_enable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_filter_new&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <i>underlying</i></span>, <span>bufferevent_filter_cb <span class='fp'>input_filter</span></span>, <span>bufferevent_filter_cb <i>output_filter</i></span>, <span>int <i>options</i></span>, <span>void(*<i>free_context</i>)(void*)</span>, <span>void* <i>ctx</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;input_filter.p0.cb_queue&#39; in 2nd parameter &#39;input_filter&#39; has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_flush&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>iotype</i></span>, <span>enum bufferevent_flush_mode <i>mode</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_free&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+ <b>...</b>
+<br/>
+</div>
+</div>
+<br/><br/></div>
+
+<br/>
+<span class='h_name'>event_struct.h</span><br/>
+<span class="section" onclick="javascript:showContent(this, 'c_8')">
+<span class='ext'>[+]</span> <span class='ttype'>struct</span> event <span class='failed'>&nbsp;4&nbsp;</span></span>
+<br/>
+<div id="c_8" style="display:none;">
+<table class='ptable'><tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th></tr><tr>
+<th>1</th>
+<td>The relative position of field <b>ev_</b> has been changed from <b>4</b> to <b>6</b>.</td>
+<td>1) Applications will access incorrect memory when attempting to access this field.<br/>2) Size of the inclusive type has been changed.</td>
+</tr>
+<tr>
+<th>2</th>
+<td>The relative position of field <b>ev_base</b> has been changed from <b>3</b> to <b>5</b>.</td>
+<td>1) Applications will access incorrect memory when attempting to access this field.<br/>2) Size of the inclusive type has been changed.</td>
+</tr>
+<tr>
+<th>3</th>
+<td>The relative position of field <b>ev_events</b> has been changed from <b>5</b> to <b>3</b>.</td>
+<td>1) Applications will access incorrect memory when attempting to access this field.<br/>2) Size of the inclusive type has been changed.</td>
+</tr>
+<tr>
+<th>4</th>
+<td>The relative position of field <b>ev_res</b> has been changed from <b>6</b> to <b>4</b>.</td>
+<td>1) Applications will access incorrect memory when attempting to access this field.<br/>2) Size of the inclusive type has been changed.</td>
+</tr>
+</table>
+<span class="sect_aff" onclick="javascript:showContent(this, 'c_9')">
+[+] affected symbols: 221 (49.4%)</span>
+<div id="c_9" style="display:none;">
+<div class='affected'><span class='iname_a'>bufferevent_add_to_rate_limit_group&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>struct bufferevent_rate_limit_group* <i>g</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base.th_notify&#39; in 1st parameter &#39;bev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_base_set&#160;<span class='sym_p'><span>(&#160;struct event_base* <span class='fp'>base</span></span>, <span>struct bufferevent* <i>bufev</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;base.current_event.evcb_cb_union.evcb_evfinalize.p0&#39; in 1st parameter &#39;base&#39; (pointer) has base type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_decref&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_read_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base.th_notify&#39; in 1st parameter &#39;bev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_write_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base.th_notify&#39; in 1st parameter &#39;bev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_disable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_enable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_filter_new&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <i>underlying</i></span>, <span>bufferevent_filter_cb <span class='fp'>input_filter</span></span>, <span>bufferevent_filter_cb <i>output_filter</i></span>, <span>int <i>options</i></span>, <span>void(*<i>free_context</i>)(void*)</span>, <span>void* <i>ctx</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;input_filter.p0.cb_queue.th_notify&#39; in 2nd parameter &#39;input_filter&#39; has base type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_flush&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>iotype</i></span>, <span>enum bufferevent_flush_mode <i>mode</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_free&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+ <b>...</b>
+<br/>
+</div>
+</div>
+<br/><br/></div>
+
+<span class="section" onclick="javascript:showContent(this, 'c_10')">
+<span class='ext'>[+]</span> <span class='ttype'>union</span> anon-union-event_struct.h-127 <span class='failed'>&nbsp;1&nbsp;</span></span>
+<br/>
+<div id="c_10" style="display:none;">
+<table class='ptable'><tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th></tr><tr>
+<th>1</th>
+<td>Type of field <b>min_heap_idx</b> has been changed from <span class='nowrap'><b>int</b> (<b>4</b> bytes)</span> to <span class='nowrap'><b>size_t</b> (<b>8</b> bytes)</span>.</td>
+<td>This field may be incorrectly initialized or accessed by applications.</td>
+</tr>
+</table>
+<span class="sect_aff" onclick="javascript:showContent(this, 'c_11')">
+[+] affected symbols: 221 (49.4%)</span>
+<div id="c_11" style="display:none;">
+<div class='affected'><span class='iname_a'>bufferevent_add_to_rate_limit_group&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>struct bufferevent_rate_limit_group* <i>g</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base.th_notify.ev_timeout_pos&#39; in 1st parameter &#39;bev&#39; (pointer) is of type &#39;anon-union-event_struct.h-127&#39;.</div>
+<span class='iname_a'>bufferevent_base_set&#160;<span class='sym_p'><span>(&#160;struct event_base* <span class='fp'>base</span></span>, <span>struct bufferevent* <i>bufev</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;base.current_event.evcb_cb_union.evcb_evfinalize.p0.ev_timeout_pos&#39; in 1st parameter &#39;base&#39; (pointer) has base type &#39;anon-union-event_struct.h-127&#39;.</div>
+<span class='iname_a'>bufferevent_decref&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify.ev_timeout_pos&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;anon-union-event_struct.h-127&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_read_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base.th_notify.ev_timeout_pos&#39; in 1st parameter &#39;bev&#39; (pointer) is of type &#39;anon-union-event_struct.h-127&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_write_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base.th_notify.ev_timeout_pos&#39; in 1st parameter &#39;bev&#39; (pointer) is of type &#39;anon-union-event_struct.h-127&#39;.</div>
+<span class='iname_a'>bufferevent_disable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify.ev_timeout_pos&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;anon-union-event_struct.h-127&#39;.</div>
+<span class='iname_a'>bufferevent_enable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify.ev_timeout_pos&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;anon-union-event_struct.h-127&#39;.</div>
+<span class='iname_a'>bufferevent_filter_new&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <i>underlying</i></span>, <span>bufferevent_filter_cb <span class='fp'>input_filter</span></span>, <span>bufferevent_filter_cb <i>output_filter</i></span>, <span>int <i>options</i></span>, <span>void(*<i>free_context</i>)(void*)</span>, <span>void* <i>ctx</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;input_filter.p0.deferred.evcb_cb_union.evcb_evfinalize.p0.ev_timeout_pos&#39; in 2nd parameter &#39;input_filter&#39; has base type &#39;anon-union-event_struct.h-127&#39;.</div>
+<span class='iname_a'>bufferevent_flush&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>iotype</i></span>, <span>enum bufferevent_flush_mode <i>mode</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify.ev_timeout_pos&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;anon-union-event_struct.h-127&#39;.</div>
+<span class='iname_a'>bufferevent_free&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify.ev_timeout_pos&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;anon-union-event_struct.h-127&#39;.</div>
+ <b>...</b>
+<br/>
+</div>
+</div>
+<br/><br/></div>
+
+<br/>
+<a class='top_ref' href='#Top'>to the top</a><br/>
+<a name='Low_Risk_Problems'></a><a name='Type_Problems_Low'></a>
+<h2>Problems with Data Types, Low Severity <span class='warning'>&nbsp;5&nbsp;</span></h2><hr/>
+<span class='h_name'>buffer.h</span><br/>
+<span class="section" onclick="javascript:showContent(this, 'c_12')">
+<span class='ext'>[+]</span> <span class='ttype'>struct</span> evbuffer <span class='warning'>&nbsp;1&nbsp;</span></span>
+<br/>
+<div id="c_12" style="display:none;">
+<table class='ptable'><tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th></tr><tr>
+<th>1</th>
+<td>Size of this type has been changed from <b>136</b> bytes to <b>144</b> bytes.</td>
+<td>The fields or parameters of such data type may be incorrectly initialized or accessed by old client applications.</td>
+</tr>
+</table>
+<span class="sect_aff" onclick="javascript:showContent(this, 'c_13')">
+[+] affected symbols: 155 (34.7%)</span>
+<div id="c_13" style="display:none;">
+<div class='affected'><span class='iname_a'>bufferevent_add_to_rate_limit_group&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>struct bufferevent_rate_limit_group* <i>g</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.input&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_base_set&#160;<span class='sym_p'><span>(&#160;struct event_base* <i>base</i></span>, <span>struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 2nd parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_decref&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_read_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.input&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_write_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.input&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_disable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_enable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_filter_new&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <i>underlying</i></span>, <span>bufferevent_filter_cb <span class='fp'>input_filter</span></span>, <span>bufferevent_filter_cb <i>output_filter</i></span>, <span>int <i>options</i></span>, <span>void(*<i>free_context</i>)(void*)</span>, <span>void* <i>ctx</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;input_filter.p0&#39; in 2nd parameter &#39;input_filter&#39; has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_flush&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>iotype</i></span>, <span>enum bufferevent_flush_mode <i>mode</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+<span class='iname_a'>bufferevent_free&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.input&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct evbuffer&#39;.</div>
+ <b>...</b>
+<br/>
+</div>
+</div>
+<br/><br/></div>
+
+<br/>
+<span class='h_name'>bufferevent_struct.h</span><br/>
+<span class="section" onclick="javascript:showContent(this, 'c_14')">
+<span class='ext'>[+]</span> <span class='ttype'>struct</span> bufferevent <span class='warning'>&nbsp;1&nbsp;</span></span>
+<br/>
+<div id="c_14" style="display:none;">
+<table class='ptable'><tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th></tr><tr>
+<th>1</th>
+<td>Size of this type has been changed from <b>392</b> bytes to <b>376</b> bytes.</td>
+<td>The fields or parameters of such data type may be incorrectly initialized or accessed by old client applications.</td>
+</tr>
+</table>
+<span class="sect_aff" onclick="javascript:showContent(this, 'c_15')">
+[+] affected symbols: 56 (12.5%)</span>
+<div id="c_15" style="display:none;">
+<div class='affected'><span class='iname_a'>bufferevent_add_to_rate_limit_group&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>struct bufferevent_rate_limit_group* <i>g</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_base_set&#160;<span class='sym_p'><span>(&#160;struct event_base* <i>base</i></span>, <span>struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>2nd parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_decref&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_read_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_write_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_disable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_enable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_filter_new&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>underlying</span></span>, <span>bufferevent_filter_cb <i>input_filter</i></span>, <span>bufferevent_filter_cb <i>output_filter</i></span>, <span>int <i>options</i></span>, <span>void(*<i>free_context</i>)(void*)</span>, <span>void* <i>ctx</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;underlying&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_flush&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>iotype</i></span>, <span>enum bufferevent_flush_mode <i>mode</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+<span class='iname_a'>bufferevent_free&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct bufferevent&#39;.</div>
+ <b>...</b>
+<br/>
+</div>
+</div>
+<br/><br/></div>
+
+<br/>
+<span class='h_name'>event.h</span><br/>
+<span class="section" onclick="javascript:showContent(this, 'c_16')">
+<span class='ext'>[+]</span> <span class='ttype'>struct</span> event_base <span class='warning'>&nbsp;2&nbsp;</span></span>
+<br/>
+<div id="c_16" style="display:none;">
+<table class='ptable'><tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th></tr><tr>
+<th>1</th>
+<td>Field <b>watchers</b> has been added to this type.</td>
+<td>1) This field will not be initialized by old clients.<br/>2) Size of the inclusive type has been changed.<br/><br/><b>NOTE</b>: this field should be accessed only from the new library functions, otherwise it may result in crash or incorrect behavior of applications.</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Size of this type has been changed from <b>664</b> bytes to <b>688</b> bytes.</td>
+<td>The fields or parameters of such data type may be incorrectly initialized or accessed by old client applications.</td>
+</tr>
+</table>
+<span class="sect_aff" onclick="javascript:showContent(this, 'c_17')">
+[+] affected symbols: 209 (46.8%)</span>
+<div id="c_17" style="display:none;">
+<div class='affected'><span class='iname_a'>bufferevent_add_to_rate_limit_group&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>struct bufferevent_rate_limit_group* <i>g</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_base_set&#160;<span class='sym_p'><span>(&#160;struct event_base* <span class='fp'>base</span></span>, <span>struct bufferevent* <i>bufev</i></span>&#160;)</span></span><br/>
+<div class='affect'>1st parameter &#39;base&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_decref&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_read_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_write_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base&#39; in 1st parameter &#39;bev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_disable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_enable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_filter_new&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <i>underlying</i></span>, <span>bufferevent_filter_cb <span class='fp'>input_filter</span></span>, <span>bufferevent_filter_cb <i>output_filter</i></span>, <span>int <i>options</i></span>, <span>void(*<i>free_context</i>)(void*)</span>, <span>void* <i>ctx</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;input_filter.p0.cb_queue&#39; in 2nd parameter &#39;input_filter&#39; has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_flush&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>iotype</i></span>, <span>enum bufferevent_flush_mode <i>mode</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+<span class='iname_a'>bufferevent_free&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base&#39; in 1st parameter &#39;bufev&#39; (pointer) has base type &#39;struct event_base&#39;.</div>
+ <b>...</b>
+<br/>
+</div>
+</div>
+<br/><br/></div>
+
+<br/>
+<span class='h_name'>event_struct.h</span><br/>
+<span class="section" onclick="javascript:showContent(this, 'c_18')">
+<span class='ext'>[+]</span> <span class='ttype'>struct</span> event <span class='warning'>&nbsp;1&nbsp;</span></span>
+<br/>
+<div id="c_18" style="display:none;">
+<table class='ptable'><tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th></tr><tr>
+<th>1</th>
+<td>Size of this type has been changed from <b>128</b> bytes to <b>120</b> bytes.</td>
+<td>The fields or parameters of such data type may be incorrectly initialized or accessed by old client applications.</td>
+</tr>
+</table>
+<span class="sect_aff" onclick="javascript:showContent(this, 'c_19')">
+[+] affected symbols: 221 (49.4%)</span>
+<div id="c_19" style="display:none;">
+<div class='affected'><span class='iname_a'>bufferevent_add_to_rate_limit_group&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>struct bufferevent_rate_limit_group* <i>g</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base.th_notify&#39; in 1st parameter &#39;bev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_base_set&#160;<span class='sym_p'><span>(&#160;struct event_base* <span class='fp'>base</span></span>, <span>struct bufferevent* <i>bufev</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;base.current_event.evcb_cb_union.evcb_evfinalize.p0&#39; in 1st parameter &#39;base&#39; (pointer) has base type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_decref&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_read_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base.th_notify&#39; in 1st parameter &#39;bev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_decrement_write_limit&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bev</span></span>, <span>ssize_t <i>decr</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bev.ev_base.th_notify&#39; in 1st parameter &#39;bev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_disable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_enable&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>event</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_filter_new&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <i>underlying</i></span>, <span>bufferevent_filter_cb <span class='fp'>input_filter</span></span>, <span>bufferevent_filter_cb <i>output_filter</i></span>, <span>int <i>options</i></span>, <span>void(*<i>free_context</i>)(void*)</span>, <span>void* <i>ctx</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;input_filter.p0.deferred.evcb_cb_union.evcb_evfinalize.p0&#39; in 2nd parameter &#39;input_filter&#39; has base type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_flush&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>, <span>short <i>iotype</i></span>, <span>enum bufferevent_flush_mode <i>mode</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+<span class='iname_a'>bufferevent_free&#160;<span class='sym_p'><span>(&#160;struct bufferevent* <span class='fp'>bufev</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;bufev.ev_base.th_notify&#39; in 1st parameter &#39;bufev&#39; (pointer) is of type &#39;struct event&#39;.</div>
+ <b>...</b>
+<br/>
+</div>
+</div>
+<br/><br/></div>
+
+<br/>
+<a class='top_ref' href='#Top'>to the top</a><br/>
+<a name='Symbol_Problems_Low'></a><a name='Interface_Problems_Low'></a>
+<h2>Problems with Symbols, Low Severity <span class='warning'>&nbsp;2&nbsp;</span></h2><hr/>
+<span class='h_name'>http.h</span>, <span class='lib_name'>libevent-2.1.so.7.0.0</span><br/>
+<span class="section" onclick="javascript:showContent(this, 'c_20')">
+<span class='ext'>[+]</span> evhttp_connection_set_timeout&#160;<span class='sym_p'><span>(&#160;struct evhttp_connection* <span class='color_p'>evcon</span></span>, <span>int <span class='color_p'>timeout_in_secs</span></span>&#160;)</span> <span class='warning'>&nbsp;1&nbsp;</span></span>
+<br/>
+<div id="c_20" style="display:none;">
+
+
+<span class='new_sign_lbl'>&#8675;</span>
+<br/>
+<span class='new_sign'>evhttp_connection_set_timeout&#160;<span class='sym_p'><span>(&#160;struct evhttp_connection* <span class='color_p'>evcon</span></span>, <span>int <span class='color_p'>timeout</span></span>&#160;)</span></span><br/>
+<table class='ptable'>
+<tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th>
+</tr>
+<tr>
+<th>1</th>
+<td><b>2nd</b> parameter <b>timeout_in_secs</b> has been renamed to <b>timeout</b>.</td>
+<td>Renaming of a parameter may indicate a change in its semantic meaning.</td>
+</tr>
+</table>
+<br/>
+</div>
+<span class="section" onclick="javascript:showContent(this, 'c_21')">
+<span class='ext'>[+]</span> evhttp_set_timeout&#160;<span class='sym_p'><span>(&#160;struct evhttp* <span class='color_p'>http</span></span>, <span>int <span class='color_p'>timeout_in_secs</span></span>&#160;)</span> <span class='warning'>&nbsp;1&nbsp;</span></span>
+<br/>
+<div id="c_21" style="display:none;">
+
+
+<span class='new_sign_lbl'>&#8675;</span>
+<br/>
+<span class='new_sign'>evhttp_set_timeout&#160;<span class='sym_p'><span>(&#160;struct evhttp* <span class='color_p'>http</span></span>, <span>int <span class='color_p'>timeout</span></span>&#160;)</span></span><br/>
+<table class='ptable'>
+<tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th>
+</tr>
+<tr>
+<th>1</th>
+<td><b>2nd</b> parameter <b>timeout_in_secs</b> has been renamed to <b>timeout</b>.</td>
+<td>Renaming of a parameter may indicate a change in its semantic meaning.</td>
+</tr>
+</table>
+<br/>
+</div>
+<br/>
+<a class='top_ref' href='#Top'>to the top</a><br/>
+<a name='Other_Changes'></a><a name='Other_Changes_In_Types'></a>
+<h2>Other Changes in Data Types <span class='passed'>&nbsp;7&nbsp;</span></h2><hr/>
+<span class='h_name'>http.h</span><br/>
+<span class="section" onclick="javascript:showContent(this, 'c_22')">
+<span class='ext'>[+]</span> <span class='ttype'>enum</span> evhttp_cmd_type <span class='passed'>&nbsp;7&nbsp;</span></span>
+<br/>
+<div id="c_22" style="display:none;">
+<table class='ptable'><tr>
+<th class='pn'></th>
+<th class='chg'>Change</th>
+<th>Effect</th></tr><tr>
+<th>1</th>
+<td>The member <b>EVHTTP_REQ_COPY</b> with value <b>16384</b> has been added.</td>
+<td>No effect.</td>
+</tr>
+<tr>
+<th>2</th>
+<td>The member <b>EVHTTP_REQ_LOCK</b> with value <b>4096</b> has been added.</td>
+<td>No effect.</td>
+</tr>
+<tr>
+<th>3</th>
+<td>The member <b>EVHTTP_REQ_MKCOL</b> with value <b>2048</b> has been added.</td>
+<td>No effect.</td>
+</tr>
+<tr>
+<th>4</th>
+<td>The member <b>EVHTTP_REQ_MOVE</b> with value <b>32768</b> has been added.</td>
+<td>No effect.</td>
+</tr>
+<tr>
+<th>5</th>
+<td>The member <b>EVHTTP_REQ_PROPFIND</b> with value <b>512</b> has been added.</td>
+<td>No effect.</td>
+</tr>
+<tr>
+<th>6</th>
+<td>The member <b>EVHTTP_REQ_PROPPATCH</b> with value <b>1024</b> has been added.</td>
+<td>No effect.</td>
+</tr>
+<tr>
+<th>7</th>
+<td>The member <b>EVHTTP_REQ_UNLOCK</b> with value <b>8192</b> has been added.</td>
+<td>No effect.</td>
+</tr>
+</table>
+<span class="sect_aff" onclick="javascript:showContent(this, 'c_23')">
+[+] affected symbols: 31 (6.9%)</span>
+<div id="c_23" style="display:none;">
+<div class='affected'><span class='iname_a'>evhttp_cancel_request&#160;<span class='sym_p'><span>(&#160;struct evhttp_request* <span class='fp'>req</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;req.type&#39; in 1st parameter &#39;req&#39; (pointer) is of type &#39;enum evhttp_cmd_type&#39;.</div>
+<span class='iname_a'>evhttp_make_request&#160;<span class='sym_p'><span>(&#160;struct evhttp_connection* <i>evcon</i></span>, <span>struct evhttp_request* <span class='fp'>req</span></span>, <span>enum evhttp_cmd_type <i>type</i></span>, <span>char const* <i>uri</i></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;req.type&#39; in 2nd parameter &#39;req&#39; (pointer) is of type &#39;enum evhttp_cmd_type&#39;.</div>
+<span class='iname_a'>evhttp_request_free&#160;<span class='sym_p'><span>(&#160;struct evhttp_request* <span class='fp'>req</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;req.type&#39; in 1st parameter &#39;req&#39; (pointer) is of type &#39;enum evhttp_cmd_type&#39;.</div>
+<span class='iname_a'>evhttp_request_get_command&#160;<span class='sym_p'><span>(&#160;struct evhttp_request const* <span class='fp'>req</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;req.type&#39; in 1st parameter &#39;req&#39; (pointer) is of type &#39;enum evhttp_cmd_type&#39;.</div>
+<span class='iname_a'>evhttp_request_get_connection&#160;<span class='sym_p'><span>(&#160;struct evhttp_request* <span class='fp'>req</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;req.type&#39; in 1st parameter &#39;req&#39; (pointer) is of type &#39;enum evhttp_cmd_type&#39;.</div>
+<span class='iname_a'>evhttp_request_get_evhttp_uri&#160;<span class='sym_p'><span>(&#160;struct evhttp_request const* <span class='fp'>req</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;req.type&#39; in 1st parameter &#39;req&#39; (pointer) is of type &#39;enum evhttp_cmd_type&#39;.</div>
+<span class='iname_a'>evhttp_request_get_host&#160;<span class='sym_p'><span>(&#160;struct evhttp_request* <span class='fp'>req</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;req.type&#39; in 1st parameter &#39;req&#39; (pointer) is of type &#39;enum evhttp_cmd_type&#39;.</div>
+<span class='iname_a'>evhttp_request_get_input_buffer&#160;<span class='sym_p'><span>(&#160;struct evhttp_request* <span class='fp'>req</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;req.type&#39; in 1st parameter &#39;req&#39; (pointer) is of type &#39;enum evhttp_cmd_type&#39;.</div>
+<span class='iname_a'>evhttp_request_get_input_headers&#160;<span class='sym_p'><span>(&#160;struct evhttp_request* <span class='fp'>req</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;req.type&#39; in 1st parameter &#39;req&#39; (pointer) is of type &#39;enum evhttp_cmd_type&#39;.</div>
+<span class='iname_a'>evhttp_request_get_output_buffer&#160;<span class='sym_p'><span>(&#160;struct evhttp_request* <span class='fp'>req</span></span>&#160;)</span></span><br/>
+<div class='affect'>Field &#39;req.type&#39; in 1st parameter &#39;req&#39; (pointer) is of type &#39;enum evhttp_cmd_type&#39;.</div>
+ <b>...</b>
+<br/>
+</div>
+</div>
+<br/><br/></div>
+
+<br/>
+<a class='top_ref' href='#Top'>to the top</a><br/>
+<a name='Headers'></a><h2>Header Files <span class='gray'>&nbsp;21&nbsp;</span></h2><hr/>
+<div class='h_list'>
+buffer.h<br/>
+buffer_compat.h<br/>
+bufferevent.h<br/>
+bufferevent_compat.h<br/>
+bufferevent_struct.h<br/>
+dns.h<br/>
+dns_compat.h<br/>
+dns_struct.h<br/>
+event.h<br/>
+event_compat.h<br/>
+event_struct.h<br/>
+http.h<br/>
+http_compat.h<br/>
+http_struct.h<br/>
+keyvalq_struct.h<br/>
+listener.h<br/>
+rpc.h<br/>
+rpc_struct.h<br/>
+tag.h<br/>
+thread.h<br/>
+util.h<br/>
+</div>
+<br/><a class='top_ref' href='#Top'>to the top</a><br/>
+<a name='Sources'></a><h2>Source Files <span class='gray'>&nbsp;17&nbsp;</span></h2><hr/>
+<div class='h_list'>
+buffer.c<br/>
+bufferevent.c<br/>
+bufferevent_filter.c<br/>
+bufferevent_pair.c<br/>
+bufferevent_ratelim.c<br/>
+bufferevent_sock.c<br/>
+evdns.c<br/>
+event.c<br/>
+event_tagging.c<br/>
+evrpc.c<br/>
+evthread.c<br/>
+evutil.c<br/>
+evutil_rand.c<br/>
+evutil_time.c<br/>
+http.c<br/>
+listener.c<br/>
+log.c<br/>
+</div>
+<br/><a class='top_ref' href='#Top'>to the top</a><br/>
+<a name='Libs'></a><h2>Objects <span class='gray'>&nbsp;1&nbsp;</span></h2><hr/>
+<div class='lib_list'>
+libevent-2.1.so.7.0.0<br/>
+</div>
+<br/><a class='top_ref' href='#Top'>to the top</a><br/>
+</div>
+<br/><br/><br/>
+<hr/>
+<div class='footer' align='right'><i>Generated by <a href='https://github.com/lvc/abi-compliance-checker'>ABI Compliance Checker</a> 2.2 &#160;</i>
+</div>
+<br/>
+
+</body></html>

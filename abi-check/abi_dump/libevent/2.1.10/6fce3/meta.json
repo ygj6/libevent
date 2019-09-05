@@ -1,0 +1,7 @@
+{
+  "Object": "lib/libevent-2.1.so.6.0.4",
+  "Lang": "C",
+  "TotalSymbols": "447",
+  "PublicABI": "1",
+  "Version": "1.11"
+}

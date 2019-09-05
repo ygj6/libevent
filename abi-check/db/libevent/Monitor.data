@@ -1,0 +1,17 @@
+$VAR1 = {
+          'Changelog' => {
+                           '2.1.10' => 'ChangeLog',
+                           '2.1.11' => 'ChangeLog'
+                         },
+          'Installed' => {
+                           '2.1.10' => 'installed/libevent/2.1.10',
+                           '2.1.11' => 'installed/libevent/2.1.11',
+                           'current' => 'installed/libevent/current'
+                         },
+          'ScmUpdateTime' => undef,
+          'Source' => {
+                        '2.1.10' => 'src/libevent/2.1.10/release-2.1.10-stable.tar.gz',
+                        '2.1.11' => 'src/libevent/2.1.11/release-2.1.11-stable.tar.gz',
+                        'current' => 'src/libevent/current'
+                      }
+        };

@@ -1,0 +1,432 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Libevent, header, diff" />
+    <meta name="description" content="Diff for header files between 2.1.10 and 2.1.11 versions of libevent" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/common.css?v=1.3" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/headers_diff.css?v=1.1.1" />
+    
+    <title>
+        Libevent: headers diff between 2.1.10 and 2.1.11 versions
+    </title>
+    
+    </head>
+
+<body>
+<table width='100%' cellpadding='0' cellspacing='0'><tr><td><table cellpadding='0' cellspacing='0'>
+<tr><td align='center'><h1 class='tool'><a title='ABI tracker for Libevent' href='../../../../timeline/libevent/index.html' class='tool'>ABI<br/>Tracker</a></h1></td><td width='30px;'></td><td><h1>(Libevent)</h1></td></tr>
+</table>
+<hr/>
+<br/>
+<br/>
+<h1>Headers diff: <span class='version'>2.1.10</span> vs <span class='version'>2.1.11</span></h1><br/><br/> 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr id="part-1" bgcolor="orange"><th>&nbsp;buffer_compat.h (2.1.10)&nbsp;</th><th> </th><th>&nbsp;buffer_compat.h (2.1.11)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-1" class="change" ><th><small>skipping to change at</small><a href="#part-1"><em> line 92<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-1"><em> line 92<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left">     callbacks set on the evbuffer, which can cause confusing behavior if</td><td> </td><td class="right">     callbacks set on the evbuffer, which can cause confusing behavior if</td></tr>
+      <tr><td class="left">     multiple parts of the code all want to add their own callbacks on a</td><td> </td><td class="right">     multiple parts of the code all want to add their own callbacks on a</td></tr>
+      <tr><td class="left">     buffer.  Instead, use evbuffer_add(), evbuffer_del(), and</td><td> </td><td class="right">     buffer.  Instead, use evbuffer_add(), evbuffer_del(), and</td></tr>
+      <tr><td class="left">     evbuffer_setflags() to manage your own evbuffer callbacks without</td><td> </td><td class="right">     evbuffer_setflags() to manage your own evbuffer callbacks without</td></tr>
+      <tr><td class="left">     interfering with callbacks set by others.</td><td> </td><td class="right">     interfering with callbacks set by others.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">  @param buffer the evbuffer to be monitored</td><td> </td><td class="right">  @param buffer the evbuffer to be monitored</td></tr>
+      <tr><td class="left">  @param cb the callback function to invoke when the evbuffer is modified,</td><td> </td><td class="right">  @param cb the callback function to invoke when the evbuffer is modified,</td></tr>
+      <tr><td class="left">        or NULL to remove all callbacks.</td><td> </td><td class="right">        or NULL to remove all callbacks.</td></tr>
+      <tr><td class="left">  @param cbarg an argument to be provided to the callback function</td><td> </td><td class="right">  @param cbarg an argument to be provided to the callback function</td></tr>
+      <tr id="diff0001"></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">  @return 0 if successful, or -1 on error</span></td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+      <tr id="diff0002"></tr>
+      <tr><td class="lblock"><span class="delete">void</span> evbuffer_setcb(struct evbuffer *buffer, evbuffer_cb cb, void *cbarg);</td><td> </td><td class="rblock"><span class="insert">int</span> evbuffer_setcb(struct evbuffer *buffer, evbuffer_cb cb, void *cbarg);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left">  Find a string within an evbuffer.</td><td> </td><td class="right">  Find a string within an evbuffer.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">  @param buffer the evbuffer to be searched</td><td> </td><td class="right">  @param buffer the evbuffer to be searched</td></tr>
+      <tr><td class="left">  @param what the string to be searched for</td><td> </td><td class="right">  @param what the string to be searched for</td></tr>
+      <tr><td class="left">  @param len the length of the search string</td><td> </td><td class="right">  @param len the length of the search string</td></tr>
+      <tr><td class="left">  @return a pointer to the beginning of the search string, or NULL if the s
+earch failed.</td><td> </td><td class="right">  @return a pointer to the beginning of the search string, or NULL if the s
+earch failed.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 2 change blocks.&nbsp;</th></tr>
+     <tr class="stats"><th><i>1 lines changed or deleted</i></th><th><i> </i></th><th><i>2 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><br/>
+ 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr id="part-1" bgcolor="orange"><th>&nbsp;bufferevent.h (2.1.10)&nbsp;</th><th> </th><th>&nbsp;bufferevent.h (2.1.11)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-1" class="change" ><th><small>skipping to change at</small><a href="#part-1"><em> line 491<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-1"><em> line 491<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left">  Set the read and write timeout for a bufferevent.</td><td> </td><td class="right">  Set the read and write timeout for a bufferevent.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">  A bufferevent's timeout will fire the first time that the indicated</td><td> </td><td class="right">  A bufferevent's timeout will fire the first time that the indicated</td></tr>
+      <tr><td class="left">  amount of time has elapsed since a successful read or write operation,</td><td> </td><td class="right">  amount of time has elapsed since a successful read or write operation,</td></tr>
+      <tr><td class="left">  during which the bufferevent was trying to read or write.</td><td> </td><td class="right">  during which the bufferevent was trying to read or write.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">  (In other words, if reading or writing is disabled, or if the</td><td> </td><td class="right">  (In other words, if reading or writing is disabled, or if the</td></tr>
+      <tr><td class="left">  bufferevent's read or write operation has been suspended because</td><td> </td><td class="right">  bufferevent's read or write operation has been suspended because</td></tr>
+      <tr id="diff0001"></tr>
+      <tr><td class="lblock">  there's no data to write, or not enough banwidth, or so on, the</td><td> </td><td class="rblock">  there's no data to write, or not enough ban<span class="insert">d</span>width, or so on, the</td></tr>
+      <tr><td class="left">  timeout isn't active.  The timeout only becomes active when we we're</td><td> </td><td class="right">  timeout isn't active.  The timeout only becomes active when we we're</td></tr>
+      <tr><td class="left">  willing to actually read or write.)</td><td> </td><td class="right">  willing to actually read or write.)</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">  Calling bufferevent_enable or setting a timeout for a bufferevent</td><td> </td><td class="right">  Calling bufferevent_enable or setting a timeout for a bufferevent</td></tr>
+      <tr><td class="left">  whose timeout is already pending resets its timeout.</td><td> </td><td class="right">  whose timeout is already pending resets its timeout.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">  If the timeout elapses, the corresponding operation (EV_READ or</td><td> </td><td class="right">  If the timeout elapses, the corresponding operation (EV_READ or</td></tr>
+      <tr><td class="left">  EV_WRITE) becomes disabled until you re-enable it again.  The</td><td> </td><td class="right">  EV_WRITE) becomes disabled until you re-enable it again.  The</td></tr>
+      <tr><td class="left">  bufferevent's event callback is called with the</td><td> </td><td class="right">  bufferevent's event callback is called with the</td></tr>
+      <tr><td class="left">  BEV_EVENT_TIMEOUT|BEV_EVENT_READING or</td><td> </td><td class="right">  BEV_EVENT_TIMEOUT|BEV_EVENT_READING or</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-2" class="change" ><th><small>skipping to change at</small><a href="#part-2"><em> line 568<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-2"><em> line 568<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left">   Release the lock on a bufferevent.  Has no effect if locking was not</td><td> </td><td class="right">   Release the lock on a bufferevent.  Has no effect if locking was not</td></tr>
+      <tr><td class="left">   enabled with BEV_OPT_THREADSAFE.</td><td> </td><td class="right">   enabled with BEV_OPT_THREADSAFE.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+      <tr><td class="left">void bufferevent_unlock(struct bufferevent *bufev);</td><td> </td><td class="right">void bufferevent_unlock(struct bufferevent *bufev);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Public interface to manually increase the reference count of a buffereve
+nt</td><td> </td><td class="right"> * Public interface to manually increase the reference count of a buffereve
+nt</td></tr>
+      <tr><td class="left"> * this is useful in situations where a user may reference the bufferevent</td><td> </td><td class="right"> * this is useful in situations where a user may reference the bufferevent</td></tr>
+      <tr id="diff0002"></tr>
+      <tr><td class="lblock"> * somewhere el<span class="delete">es</span> (unknown to libevent)</td><td> </td><td class="rblock"> * somewhere el<span class="insert">se</span> (unknown to libevent)</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * @param bufev the bufferevent to increase the refcount on</td><td> </td><td class="right"> * @param bufev the bufferevent to increase the refcount on</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+      <tr><td class="left">void bufferevent_incref(struct bufferevent *bufev);</td><td> </td><td class="right">void bufferevent_incref(struct bufferevent *bufev);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Public interface to manually decrement the reference count of a bufferev
+ent</td><td> </td><td class="right"> * Public interface to manually decrement the reference count of a bufferev
+ent</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-3" class="change" ><th><small>skipping to change at</small><a href="#part-3"><em> line 801<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-3"><em> line 801<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left">   Set the rate-limit of a the bufferevent 'bev' to the one specified in</td><td> </td><td class="right">   Set the rate-limit of a the bufferevent 'bev' to the one specified in</td></tr>
+      <tr><td class="left">   'cfg'.  If 'cfg' is NULL, disable any per-bufferevent rate-limiting on</td><td> </td><td class="right">   'cfg'.  If 'cfg' is NULL, disable any per-bufferevent rate-limiting on</td></tr>
+      <tr><td class="left">   'bev'.</td><td> </td><td class="right">   'bev'.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">   Note that only some bufferevent types currently respect rate-limiting.</td><td> </td><td class="right">   Note that only some bufferevent types currently respect rate-limiting.</td></tr>
+      <tr><td class="left">   They are: socket-based bufferevents (normal and IOCP-based), and SSL-bas
+ed</td><td> </td><td class="right">   They are: socket-based bufferevents (normal and IOCP-based), and SSL-bas
+ed</td></tr>
+      <tr><td class="left">   bufferevents.</td><td> </td><td class="right">   bufferevents.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="diff0003"></tr>
+      <tr><td class="lblock">   Return 0 on sucess, -1 on failure.</td><td> </td><td class="rblock">   Return 0 on suc<span class="insert">c</span>ess, -1 on failure.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+      <tr><td class="left">int bufferevent_set_rate_limit(struct bufferevent *bev,</td><td> </td><td class="right">int bufferevent_set_rate_limit(struct bufferevent *bev,</td></tr>
+      <tr><td class="left">    struct ev_token_bucket_cfg *cfg);</td><td> </td><td class="right">    struct ev_token_bucket_cfg *cfg);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left">   Create a new rate-limit group for bufferevents.  A rate-limit group</td><td> </td><td class="right">   Create a new rate-limit group for bufferevents.  A rate-limit group</td></tr>
+      <tr><td class="left">   constrains the maximum number of bytes sent and received, in toto,</td><td> </td><td class="right">   constrains the maximum number of bytes sent and received, in toto,</td></tr>
+      <tr><td class="left">   by all of its bufferevents.</td><td> </td><td class="right">   by all of its bufferevents.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-4" class="change" ><th><small>skipping to change at</small><a href="#part-4"><em> line 852<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-4"><em> line 852<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left">   The rationale is that, because of TCP/IP protocol overheads and kernel</td><td> </td><td class="right">   The rationale is that, because of TCP/IP protocol overheads and kernel</td></tr>
+      <tr><td class="left">   behavior, if a rate-limiting group is so tight on bandwidth that you're</td><td> </td><td class="right">   behavior, if a rate-limiting group is so tight on bandwidth that you're</td></tr>
+      <tr><td class="left">   only willing to send 1 byte per tick per bufferevent, you might instead</td><td> </td><td class="right">   only willing to send 1 byte per tick per bufferevent, you might instead</td></tr>
+      <tr><td class="left">   want to batch up the reads and writes so that you send N bytes per</td><td> </td><td class="right">   want to batch up the reads and writes so that you send N bytes per</td></tr>
+      <tr><td class="left">   1/N of the bufferevents (chosen at random) each tick, so you still wind</td><td> </td><td class="right">   1/N of the bufferevents (chosen at random) each tick, so you still wind</td></tr>
+      <tr><td class="left">   up send 1 byte per tick per bufferevent on average, but you don't send</td><td> </td><td class="right">   up send 1 byte per tick per bufferevent on average, but you don't send</td></tr>
+      <tr><td class="left">   so many tiny packets.</td><td> </td><td class="right">   so many tiny packets.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">   The default min-share is currently 64 bytes.</td><td> </td><td class="right">   The default min-share is currently 64 bytes.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="diff0004"></tr>
+      <tr><td class="lblock">   Returns 0 on success, -1 on fa<span class="delete">ul</span>re.</td><td> </td><td class="rblock">   Returns 0 on success, -1 on fa<span class="insert">ilu</span>re.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+      <tr><td class="left">int bufferevent_rate_limit_group_set_min_share(</td><td> </td><td class="right">int bufferevent_rate_limit_group_set_min_share(</td></tr>
+      <tr><td class="left">       struct bufferevent_rate_limit_group *, size_t);</td><td> </td><td class="right">       struct bufferevent_rate_limit_group *, size_t);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left">   Free a rate-limiting group.  The group must have no members when</td><td> </td><td class="right">   Free a rate-limiting group.  The group must have no members when</td></tr>
+      <tr><td class="left">   this function is called.</td><td> </td><td class="right">   this function is called.</td></tr>
+      <tr><td class="left">*/</td><td> </td><td class="right">*/</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 4 change blocks.&nbsp;</th></tr>
+     <tr class="stats"><th><i>4 lines changed or deleted</i></th><th><i> </i></th><th><i>4 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><br/>
+ 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr id="part-1" bgcolor="orange"><th>&nbsp;dns.h (2.1.10)&nbsp;</th><th> </th><th>&nbsp;dns.h (2.1.11)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-1" class="change" ><th><small>skipping to change at</small><a href="#part-1"><em> line 454<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-1"><em> line 454<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left">*/</td><td> </td><td class="right">*/</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+      <tr><td class="left">void evdns_cancel_request(struct evdns_base *base, struct evdns_request *re
+q);</td><td> </td><td class="right">void evdns_cancel_request(struct evdns_base *base, struct evdns_request *re
+q);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left">  Set the value of a configuration option.</td><td> </td><td class="right">  Set the value of a configuration option.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">  The currently available configuration options are:</td><td> </td><td class="right">  The currently available configuration options are:</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">    ndots, timeout, max-timeouts, max-inflight, attempts, randomize-case,</td><td> </td><td class="right">    ndots, timeout, max-timeouts, max-inflight, attempts, randomize-case,</td></tr>
+      <tr id="diff0001"></tr>
+      <tr><td class="lblock">    bind-to, initial-probe-timeout, <span class="delete">getaddrinfo-allow-skew.</span></td><td> </td><td class="rblock">    bind-to, initial-probe-timeout, <span class="insert">getaddrinfo-allow-skew,</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">    so-rcvbuf, so-sndbuf.</span></td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">  In versions before Libevent 2.0.3-alpha, the option name needed to end wi
+th</td><td> </td><td class="right">  In versions before Libevent 2.0.3-alpha, the option name needed to end wi
+th</td></tr>
+      <tr><td class="left">  a colon.</td><td> </td><td class="right">  a colon.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">  @param base the evdns_base to which to apply this operation</td><td> </td><td class="right">  @param base the evdns_base to which to apply this operation</td></tr>
+      <tr><td class="left">  @param option the name of the configuration option to be modified</td><td> </td><td class="right">  @param option the name of the configuration option to be modified</td></tr>
+      <tr><td class="left">  @param val the value to be set</td><td> </td><td class="right">  @param val the value to be set</td></tr>
+      <tr><td class="left">  @return 0 if successful, or -1 if an error occurred</td><td> </td><td class="right">  @return 0 if successful, or -1 if an error occurred</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 1 change blocks.&nbsp;</th></tr>
+     <tr class="stats"><th><i>1 lines changed or deleted</i></th><th><i> </i></th><th><i>2 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><br/>
+ 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr id="part-1" bgcolor="orange"><th>&nbsp;event-config.h (2.1.10)&nbsp;</th><th> </th><th>&nbsp;event-config.h (2.1.11)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-1" class="change" ><th><small>skipping to change at</small><a href="#part-1"><em> line 430<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-1"><em> line 430<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left">/* Define to 1 if compiler have __FUNCTION__ */</td><td> </td><td class="right">/* Define to 1 if compiler have __FUNCTION__ */</td></tr>
+      <tr><td class="left">#define EVENT__HAVE___FUNCTION__ 1</td><td> </td><td class="right">#define EVENT__HAVE___FUNCTION__ 1</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Define to 1 if compiler have __func__ */</td><td> </td><td class="right">/* Define to 1 if compiler have __func__ */</td></tr>
+      <tr><td class="left">#define EVENT__HAVE___func__ 1</td><td> </td><td class="right">#define EVENT__HAVE___func__ 1</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Define to the sub-directory where libtool stores uninstalled libraries. 
+*/</td><td> </td><td class="right">/* Define to the sub-directory where libtool stores uninstalled libraries. 
+*/</td></tr>
+      <tr><td class="left">#define EVENT__LT_OBJDIR ".libs/"</td><td> </td><td class="right">#define EVENT__LT_OBJDIR ".libs/"</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Numeric representation of the version */</td><td> </td><td class="right">/* Numeric representation of the version */</td></tr>
+      <tr id="diff0001"></tr>
+      <tr><td class="lblock">#define EVENT__NUMERIC_VERSION 0x02010<span class="delete">a</span>00</td><td> </td><td class="rblock">#define EVENT__NUMERIC_VERSION 0x02010<span class="insert">b</span>00</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Name of package */</td><td> </td><td class="right">/* Name of package */</td></tr>
+      <tr><td class="left">#define EVENT__PACKAGE "libevent"</td><td> </td><td class="right">#define EVENT__PACKAGE "libevent"</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Define to the address where bug reports for this package should be sent.
+ */</td><td> </td><td class="right">/* Define to the address where bug reports for this package should be sent.
+ */</td></tr>
+      <tr><td class="left">#define EVENT__PACKAGE_BUGREPORT ""</td><td> </td><td class="right">#define EVENT__PACKAGE_BUGREPORT ""</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Define to the full name of this package. */</td><td> </td><td class="right">/* Define to the full name of this package. */</td></tr>
+      <tr><td class="left">#define EVENT__PACKAGE_NAME "libevent"</td><td> </td><td class="right">#define EVENT__PACKAGE_NAME "libevent"</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Define to the full name and version of this package. */</td><td> </td><td class="right">/* Define to the full name and version of this package. */</td></tr>
+      <tr id="diff0002"></tr>
+      <tr><td class="lblock">#define EVENT__PACKAGE_STRING "libevent 2.1.1<span class="delete">0</span>-stable"</td><td> </td><td class="rblock">#define EVENT__PACKAGE_STRING "libevent 2.1.1<span class="insert">1</span>-stable"</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Define to the one symbol short name of this package. */</td><td> </td><td class="right">/* Define to the one symbol short name of this package. */</td></tr>
+      <tr><td class="left">#define EVENT__PACKAGE_TARNAME "libevent"</td><td> </td><td class="right">#define EVENT__PACKAGE_TARNAME "libevent"</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Define to the home page for this package. */</td><td> </td><td class="right">/* Define to the home page for this package. */</td></tr>
+      <tr><td class="left">#define EVENT__PACKAGE_URL ""</td><td> </td><td class="right">#define EVENT__PACKAGE_URL ""</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Define to the version of this package. */</td><td> </td><td class="right">/* Define to the version of this package. */</td></tr>
+      <tr id="diff0003"></tr>
+      <tr><td class="lblock">#define EVENT__PACKAGE_VERSION "2.1.1<span class="delete">0</span>-stable"</td><td> </td><td class="rblock">#define EVENT__PACKAGE_VERSION "2.1.1<span class="insert">1</span>-stable"</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Define to necessary symbol if this constant uses a non-standard name on</td><td> </td><td class="right">/* Define to necessary symbol if this constant uses a non-standard name on</td></tr>
+      <tr><td class="left">   your system. */</td><td> </td><td class="right">   your system. */</td></tr>
+      <tr><td class="left">/* #undef EVENT__PTHREAD_CREATE_JOINABLE */</td><td> </td><td class="right">/* #undef EVENT__PTHREAD_CREATE_JOINABLE */</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* The size of `int', as computed by sizeof. */</td><td> </td><td class="right">/* The size of `int', as computed by sizeof. */</td></tr>
+      <tr><td class="left">#define EVENT__SIZEOF_INT 4</td><td> </td><td class="right">#define EVENT__SIZEOF_INT 4</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* The size of `long', as computed by sizeof. */</td><td> </td><td class="right">/* The size of `long', as computed by sizeof. */</td></tr>
+      <tr><td class="left">#define EVENT__SIZEOF_LONG 8</td><td> </td><td class="right">#define EVENT__SIZEOF_LONG 8</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-2" class="change" ><th><small>skipping to change at</small><a href="#part-2"><em> line 512<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-2"><em> line 512<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left">/* Enable extensions on HP NonStop.  */</td><td> </td><td class="right">/* Enable extensions on HP NonStop.  */</td></tr>
+      <tr><td class="left">#ifndef _TANDEM_SOURCE</td><td> </td><td class="right">#ifndef _TANDEM_SOURCE</td></tr>
+      <tr><td class="left"># define _TANDEM_SOURCE 1</td><td> </td><td class="right"># define _TANDEM_SOURCE 1</td></tr>
+      <tr><td class="left">#endif</td><td> </td><td class="right">#endif</td></tr>
+      <tr><td class="left">/* Enable general extensions on Solaris.  */</td><td> </td><td class="right">/* Enable general extensions on Solaris.  */</td></tr>
+      <tr><td class="left">#ifndef __EXTENSIONS__</td><td> </td><td class="right">#ifndef __EXTENSIONS__</td></tr>
+      <tr><td class="left"># define __EXTENSIONS__ 1</td><td> </td><td class="right"># define __EXTENSIONS__ 1</td></tr>
+      <tr><td class="left">#endif</td><td> </td><td class="right">#endif</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Version number of package */</td><td> </td><td class="right">/* Version number of package */</td></tr>
+      <tr id="diff0004"></tr>
+      <tr><td class="lblock">#define EVENT__VERSION "2.1.1<span class="delete">0</span>-stable"</td><td> </td><td class="rblock">#define EVENT__VERSION "2.1.1<span class="insert">1</span>-stable"</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Enable large inode numbers on Mac OS X 10.5.  */</td><td> </td><td class="right">/* Enable large inode numbers on Mac OS X 10.5.  */</td></tr>
+      <tr><td class="left">#ifndef _DARWIN_USE_64_BIT_INODE</td><td> </td><td class="right">#ifndef _DARWIN_USE_64_BIT_INODE</td></tr>
+      <tr><td class="left"># define _DARWIN_USE_64_BIT_INODE 1</td><td> </td><td class="right"># define _DARWIN_USE_64_BIT_INODE 1</td></tr>
+      <tr><td class="left">#endif</td><td> </td><td class="right">#endif</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Number of bits in a file offset, on hosts where this is settable. */</td><td> </td><td class="right">/* Number of bits in a file offset, on hosts where this is settable. */</td></tr>
+      <tr><td class="left">/* #undef _FILE_OFFSET_BITS */</td><td> </td><td class="right">/* #undef _FILE_OFFSET_BITS */</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/* Define for large files, on AIX-style hosts. */</td><td> </td><td class="right">/* Define for large files, on AIX-style hosts. */</td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 4 change blocks.&nbsp;</th></tr>
+     <tr class="stats"><th><i>4 lines changed or deleted</i></th><th><i> </i></th><th><i>4 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><br/>
+ 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr id="part-1" bgcolor="orange"><th>&nbsp;event.h (2.1.10)&nbsp;</th><th> </th><th>&nbsp;event.h (2.1.11)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-1" class="change" ><th><small>skipping to change at</small><a href="#part-1"><em> line 287<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-1"><em> line 287<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left">{/*Empty body so that doxygen will generate documentation here.*/}</td><td> </td><td class="right">{/*Empty body so that doxygen will generate documentation here.*/}</td></tr>
+      <tr><td class="left">#endif</td><td> </td><td class="right">#endif</td></tr>
+      <tr><td class="left">;</td><td> </td><td class="right">;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Configuration for an event_base.</td><td> </td><td class="right"> * Configuration for an event_base.</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * There are many options that can be used to alter the behavior and</td><td> </td><td class="right"> * There are many options that can be used to alter the behavior and</td></tr>
+      <tr><td class="left"> * implementation of an event_base.  To avoid having to pass them all in a</td><td> </td><td class="right"> * implementation of an event_base.  To avoid having to pass them all in a</td></tr>
+      <tr><td class="left"> * complex many-argument constructor, we provide an abstract data type</td><td> </td><td class="right"> * complex many-argument constructor, we provide an abstract data type</td></tr>
+      <tr id="diff0001"></tr>
+      <tr><td class="lblock"> * where you set up configation information before passing it to</td><td> </td><td class="rblock"> * where you set up config<span class="insert">ur</span>ation information before passing it to</td></tr>
+      <tr><td class="left"> * event_base_new_with_config().</td><td> </td><td class="right"> * event_base_new_with_config().</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * @see event_config_new(), event_config_free(), event_base_new_with_config
+(),</td><td> </td><td class="right"> * @see event_config_new(), event_config_free(), event_base_new_with_config
+(),</td></tr>
+      <tr><td class="left"> *   event_config_avoid_method(), event_config_require_features(),</td><td> </td><td class="right"> *   event_config_avoid_method(), event_config_require_features(),</td></tr>
+      <tr><td class="left"> *   event_config_set_flag(), event_config_set_num_cpus_hint()</td><td> </td><td class="right"> *   event_config_set_flag(), event_config_set_num_cpus_hint()</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">struct event_config</td><td> </td><td class="right">struct event_config</td></tr>
+      <tr><td class="left">#ifdef EVENT_IN_DOXYGEN_</td><td> </td><td class="right">#ifdef EVENT_IN_DOXYGEN_</td></tr>
+      <tr><td class="left">{/*Empty body so that doxygen will generate documentation here.*/}</td><td> </td><td class="right">{/*Empty body so that doxygen will generate documentation here.*/}</td></tr>
+      <tr><td class="left">#endif</td><td> </td><td class="right">#endif</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-2" class="change" ><th><small>skipping to change at</small><a href="#part-2"><em> line 634<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-2"><em> line 634<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left"> * @param cfg the event configuration object</td><td> </td><td class="right"> * @param cfg the event configuration object</td></tr>
+      <tr><td class="left"> * @param cpus the number of cpus</td><td> </td><td class="right"> * @param cpus the number of cpus</td></tr>
+      <tr><td class="left"> * @return 0 on success, -1 on failure.</td><td> </td><td class="right"> * @return 0 on success, -1 on failure.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+      <tr><td class="left">int event_config_set_num_cpus_hint(struct event_config *cfg, int cpus);</td><td> </td><td class="right">int event_config_set_num_cpus_hint(struct event_config *cfg, int cpus);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Record an interval and/or a number of callbacks after which the event ba
+se</td><td> </td><td class="right"> * Record an interval and/or a number of callbacks after which the event ba
+se</td></tr>
+      <tr><td class="left"> * should check for new events.  By default, the event base will run as man
+y</td><td> </td><td class="right"> * should check for new events.  By default, the event base will run as man
+y</td></tr>
+      <tr id="diff0002"></tr>
+      <tr><td class="lblock"> * events are as activated at the hig<span class="delete">est activated priority before checkin</span>g</td><td> </td><td class="rblock"> * events are as activated at the hig<span class="insert">hest activated priority before checkin
+</span>g</td></tr>
+      <tr><td class="left"> * for new events.  If you configure it by setting max_interval, it will ch
+eck</td><td> </td><td class="right"> * for new events.  If you configure it by setting max_interval, it will ch
+eck</td></tr>
+      <tr><td class="left"> * the time after each callback, and not allow more than max_interval to</td><td> </td><td class="right"> * the time after each callback, and not allow more than max_interval to</td></tr>
+      <tr><td class="left"> * elapse before checking for new events.  If you configure it by setting</td><td> </td><td class="right"> * elapse before checking for new events.  If you configure it by setting</td></tr>
+      <tr><td class="left"> * max_callbacks to a value &gt;= 0, it will run no more than max_callbacks</td><td> </td><td class="right"> * max_callbacks to a value &gt;= 0, it will run no more than max_callbacks</td></tr>
+      <tr><td class="left"> * callbacks before checking for new events.</td><td> </td><td class="right"> * callbacks before checking for new events.</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * This option can decrease the latency of high-priority events, and</td><td> </td><td class="right"> * This option can decrease the latency of high-priority events, and</td></tr>
+      <tr><td class="left"> * avoid priority inversions where multiple low-priority events keep us fro
+m</td><td> </td><td class="right"> * avoid priority inversions where multiple low-priority events keep us fro
+m</td></tr>
+      <tr><td class="left"> * polling for high-priority events, but at the expense of slightly decreas
+ing</td><td> </td><td class="right"> * polling for high-priority events, but at the expense of slightly decreas
+ing</td></tr>
+      <tr><td class="left"> * the throughput.  Use it with caution!</td><td> </td><td class="right"> * the throughput.  Use it with caution!</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-3" class="change" ><th><small>skipping to change at</small><a href="#part-3"><em> line 1322<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-3"><em> line 1322<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+      <tr><td class="left">struct event *event_base_get_running_event(struct event_base *base);</td><td> </td><td class="right">struct event *event_base_get_running_event(struct event_base *base);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left">  Test if an event structure might be initialized.</td><td> </td><td class="right">  Test if an event structure might be initialized.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">  The event_initialized() function can be used to check if an event has bee
+n</td><td> </td><td class="right">  The event_initialized() function can be used to check if an event has bee
+n</td></tr>
+      <tr><td class="left">  initialized.</td><td> </td><td class="right">  initialized.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="diff0003"></tr>
+      <tr><td class="lblock">  Warning: This function is only useful for distinguishing a <span class="delete">a </span>zeroed-out</td><td> </td><td class="rblock">  Warning: This function is only useful for distinguishing a zeroed-out</td></tr>
+      <tr><td class="left">    piece of memory from an initialized event, it can easily be confused by</td><td> </td><td class="right">    piece of memory from an initialized event, it can easily be confused by</td></tr>
+      <tr><td class="left">    uninitialized memory.  Thus, it should ONLY be used to distinguish an</td><td> </td><td class="right">    uninitialized memory.  Thus, it should ONLY be used to distinguish an</td></tr>
+      <tr><td class="left">    initialized event from zero.</td><td> </td><td class="right">    initialized event from zero.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">  @param ev an event structure to be tested</td><td> </td><td class="right">  @param ev an event structure to be tested</td></tr>
+      <tr><td class="left">  @return 1 if the structure might be initialized, or 0 if it has not been</td><td> </td><td class="right">  @return 1 if the structure might be initialized, or 0 if it has not been</td></tr>
+      <tr><td class="left">          initialized</td><td> </td><td class="right">          initialized</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">EVENT2_EXPORT_SYMBOL</td><td> </td><td class="right">EVENT2_EXPORT_SYMBOL</td></tr>
+      <tr><td class="left">int event_initialized(const struct event *ev);</td><td> </td><td class="right">int event_initialized(const struct event *ev);</td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 3 change blocks.&nbsp;</th></tr>
+     <tr class="stats"><th><i>3 lines changed or deleted</i></th><th><i> </i></th><th><i>3 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><br/>
+ 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr id="part-1" bgcolor="orange"><th>&nbsp;event_struct.h (2.1.10)&nbsp;</th><th> </th><th>&nbsp;event_struct.h (2.1.11)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr id="part-1" class="change" ><th><small>skipping to change at</small><a href="#part-1"><em> line 129<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-1"><em> line 129<span class="hide"> &para;</span></em></a></th></tr>
+      <tr><td class="left">       void *evcb_arg;</td><td> </td><td class="right">       void *evcb_arg;</td></tr>
+      <tr><td class="left">};</td><td> </td><td class="right">};</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">struct event_base;</td><td> </td><td class="right">struct event_base;</td></tr>
+      <tr><td class="left">struct event {</td><td> </td><td class="right">struct event {</td></tr>
+      <tr><td class="left">       struct event_callback ev_evcallback;</td><td> </td><td class="right">       struct event_callback ev_evcallback;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /* for managing timeouts */</td><td> </td><td class="right">       /* for managing timeouts */</td></tr>
+      <tr><td class="left">       union {</td><td> </td><td class="right">       union {</td></tr>
+      <tr><td class="left">               TAILQ_ENTRY(event) ev_next_with_common_timeout;</td><td> </td><td class="right">               TAILQ_ENTRY(event) ev_next_with_common_timeout;</td></tr>
+      <tr id="diff0001"></tr>
+      <tr><td class="lblock">               <span class="delete">size_</span>t min_heap_idx;</td><td> </td><td class="rblock">               <span class="insert">in</span>t min_heap_idx;</td></tr>
+      <tr><td class="left">       } ev_timeout_pos;</td><td> </td><td class="right">       } ev_timeout_pos;</td></tr>
+      <tr><td class="left">       evutil_socket_t ev_fd;</td><td> </td><td class="right">       evutil_socket_t ev_fd;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       struct event_base *ev_base;</td><td> </td><td class="right">       struct event_base *ev_base;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       union {</td><td> </td><td class="right">       union {</td></tr>
+      <tr><td class="left">               /* used for io events */</td><td> </td><td class="right">               /* used for io events */</td></tr>
+      <tr><td class="left">               struct {</td><td> </td><td class="right">               struct {</td></tr>
+      <tr><td class="left">                       LIST_ENTRY (event) ev_io_next;</td><td> </td><td class="right">                       LIST_ENTRY (event) ev_io_next;</td></tr>
+      <tr><td class="left">                       struct timeval ev_timeout;</td><td> </td><td class="right">                       struct timeval ev_timeout;</td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 1 change blocks.&nbsp;</th></tr>
+     <tr class="stats"><th><i>1 lines changed or deleted</i></th><th><i> </i></th><th><i>1 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><div style='width:100%;' align='left' class='small'>This html diff was produced by rfcdiff 1.41.The latest version is available from <a href='http://tools.ietf.org/tools/rfcdiff/'>http://tools.ietf.org/tools/rfcdiff/</a></div>
+</td></tr></table>
+</body>
+</html>

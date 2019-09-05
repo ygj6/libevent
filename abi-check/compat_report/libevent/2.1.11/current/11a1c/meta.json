@@ -1,0 +1,8 @@
+{
+  "Affected": "50",
+  "Added": 0,
+  "Removed": 0,
+  "TotalProblems": 9,
+  "Object1": "lib/libevent_openssl-2.1.so.7.0.0",
+  "Object2": "lib/libevent_openssl-2.2.so.1.0.0"
+}
