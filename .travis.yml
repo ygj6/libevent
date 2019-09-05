@@ -41,6 +41,27 @@ matrix:
       dist: bionic
       env: EVENT_BUILD_METHOD=autotools EVENT_CONFIGURE_OPTIONS=""
       compiler: clang
+    # for abi-tracker
+    - os: linux
+      compiler: gcc
+      env: EVENT_CI_CC=gcc EVENT_ABI_CHECK=1
+      dist: bionic
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc
+            - libelf-dev
+            - elfutils
+            - texinfo
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GITHUB_API_TOKEN
+        local_dir: ${HOME}/abi-check/work
+        on:
+          branch: CI
   exclude:
     - os: osx
       env: EVENT_BUILD_METHOD=cmake EVENT_CMAKE_OPTIONS="-DEVENT__COVERAGE=ON -DCMAKE_BUILD_TYPE=debug" COVERALLS=yes
@@ -118,6 +139,10 @@ script:
       travis_wait $TIMEOUT
       cmake --build . --target verify;
     fi
+  - if [ "$EVENT_ABI_CHECK" = "1" ]; then
+      chmod +x ./ABI/abi_check.sh &&
+      ./ABI/abi_check.sh;
+    fi 
 
 after_script:
   - if [ -n "$COVERALLS" ]; then
