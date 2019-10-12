@@ -40,6 +40,12 @@ noinst_HEADERS += \
 	sample/openssl_hostname_validation.h
 endif
 
+if !BUILD_WIN32
+SAMPLES += sample/unix-sock-client
+sample_unix_sock_client_SOURCES = sample/unix-sock-client.c
+sample_unix_sock_client_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
+endif
+
 if BUILD_SAMPLES
 noinst_PROGRAMS += $(SAMPLES)
 endif

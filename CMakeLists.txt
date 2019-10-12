@@ -991,11 +991,13 @@ endmacro()
 if (NOT EVENT__DISABLE_SAMPLES)
     set(SAMPLES
         event-read-fifo
-        hello-world
         signal-test
         http-connect
         time-test
         watch-timing)
+    if (NOT WIN32 OR EVENT__HAVE_AFUNIX_H)
+        list(APPEND SAMPLES unix-sock-client)
+    endif()
 
     foreach(SAMPLE ${SAMPLES})
         add_sample_prog(OFF ${SAMPLE} sample/${SAMPLE}.c)
@@ -1015,6 +1017,7 @@ if (NOT EVENT__DISABLE_SAMPLES)
     endif()
 
     set(SAMPLES_WOPT
+        hello-world
         dns-example
         http-server
     )

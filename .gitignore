@@ -93,6 +93,7 @@ Doxyfile.doxygen
 dns-example
 event-read-fifo
 hello-world
+unix-sock-client
 http-server
 http-connect
 le-proxy
