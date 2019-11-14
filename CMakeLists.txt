@@ -1330,7 +1330,7 @@ if (NOT EVENT__DISABLE_TESTS)
              -g 30000
              -n 30
              -t 100
-             --check-grouplimit 1000
+             --check-grouplimit 3000
              --check-stddev 100)
 
     # Connection limit, no group limit.
