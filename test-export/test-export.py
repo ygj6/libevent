@@ -131,60 +131,60 @@ class test_export(unittest.TestCase):
     def test_link_core_run_core(self):
         self.assertEqual(link_and_run("core", "core"), 0)
 
-    def test_link_extra_run_extra(self):
-        self.assertEqual(link_and_run("extra", "extra"), 0)
+#     def test_link_extra_run_extra(self):
+#         self.assertEqual(link_and_run("extra", "extra"), 0)
 
-    def test_link_openssl_run_openssl(self):
-        self.assertEqual(link_and_run("openssl", "openssl"), 0)
+#     def test_link_openssl_run_openssl(self):
+#         self.assertEqual(link_and_run("openssl", "openssl"), 0)
 
-    def test_link_all_run_all(self):
-        self.assertEqual(link_and_run("", ""), 0)
+#     def test_link_all_run_all(self):
+#         self.assertEqual(link_and_run("", ""), 0)
 
-    def test_link_extra_run_core(self):
-        self.assertEqual(link_and_run("extra", "core"), 0)
+#     def test_link_extra_run_core(self):
+#         self.assertEqual(link_and_run("extra", "core"), 0)
 
-    def test_link_openssl_run_core(self):
-        self.assertEqual(link_and_run("openssl", "core"), 0)
+#     def test_link_openssl_run_core(self):
+#         self.assertEqual(link_and_run("openssl", "core"), 0)
 
-    def test_link_core_run_extra(self):
-        self.assertEqual(link_and_run("core", "extra"), 1)
+#     def test_link_core_run_extra(self):
+#         self.assertEqual(link_and_run("core", "extra"), 1)
 
-    def test_link_core_run_openssl(self):
-        self.assertEqual(link_and_run("core", "openssl"), 1)
+#     def test_link_core_run_openssl(self):
+#         self.assertEqual(link_and_run("core", "openssl"), 1)
 
-    def test_link_extra_run_openssl(self):
-        self.assertEqual(link_and_run("extra", "openssl"), 1)
+#     def test_link_extra_run_openssl(self):
+#         self.assertEqual(link_and_run("extra", "openssl"), 1)
 
-    def test_link_openssl_run_extra(self):
-        self.assertEqual(link_and_run("openssl", "extra"), 1)
+#     def test_link_openssl_run_extra(self):
+#         self.assertEqual(link_and_run("openssl", "extra"), 1)
 
-    @unittest.skipIf(is_windows, "not supported on Windows")
-    def test_link_pthreads_run_pthreads(self):
-        self.assertEqual(link_and_run("pthreads", "pthreads"), 0)
+#     @unittest.skipIf(is_windows, "not supported on Windows")
+#     def test_link_pthreads_run_pthreads(self):
+#         self.assertEqual(link_and_run("pthreads", "pthreads"), 0)
 
-    @unittest.skipIf(is_windows, "not supported on Windows")
-    def test_link_pthreads_run_core(self):
-        self.assertEqual(link_and_run("pthreads", "core"), 0)
+#     @unittest.skipIf(is_windows, "not supported on Windows")
+#     def test_link_pthreads_run_core(self):
+#         self.assertEqual(link_and_run("pthreads", "core"), 0)
 
-    @unittest.skipIf(is_windows, "not supported on Windows")
-    def test_link_core_run_pthreads(self):
-        self.assertEqual(link_and_run("core", "pthreads"), 1)
+#     @unittest.skipIf(is_windows, "not supported on Windows")
+#     def test_link_core_run_pthreads(self):
+#         self.assertEqual(link_and_run("core", "pthreads"), 1)
 
-    @unittest.skipIf(is_windows, "not supported on Windows")
-    def test_link_pthreads_run_extra(self):
-        self.assertEqual(link_and_run("pthreads", "extra"), 1)
+#     @unittest.skipIf(is_windows, "not supported on Windows")
+#     def test_link_pthreads_run_extra(self):
+#         self.assertEqual(link_and_run("pthreads", "extra"), 1)
 
-    @unittest.skipIf(is_windows, "not supported on Windows")
-    def test_link_extra_run_pthreads(self):
-        self.assertEqual(link_and_run("extra", "pthreads"), 1)
+#     @unittest.skipIf(is_windows, "not supported on Windows")
+#     def test_link_extra_run_pthreads(self):
+#         self.assertEqual(link_and_run("extra", "pthreads"), 1)
 
-    @unittest.skipIf(is_windows, "not supported on Windows")
-    def test_link_pthreads_run_openssl(self):
-        self.assertEqual(link_and_run("pthreads", "openssl"), 1)
+#     @unittest.skipIf(is_windows, "not supported on Windows")
+#     def test_link_pthreads_run_openssl(self):
+#         self.assertEqual(link_and_run("pthreads", "openssl"), 1)
 
-    @unittest.skipIf(is_windows, "not supported on Windows")
-    def test_link_openssl_run_pthreads(self):
-        self.assertEqual(link_and_run("openssl", "pthreads"), 1)
+#     @unittest.skipIf(is_windows, "not supported on Windows")
+#     def test_link_openssl_run_pthreads(self):
+#         self.assertEqual(link_and_run("openssl", "pthreads"), 1)
 
 
 shutil.rmtree(os.path.join(script_dir, "build"), ignore_errors=True)
