@@ -92,7 +92,7 @@ init:
 
 build_script:
   - ps: $PIPENV_QUIET="true"
-  - ps: >-
+  - ps: |
       if ($env:EVENT_BUILD_METHOD -eq 'autotools') {
         $env:PATH="$env:MPATH;$env:OPENSSL_ROOT/bin;$env:PATH"
         $env:LDFLAGS="-L$($env:OPENSSL_ROOT)/lib -L$($env:OPENSSL_ROOT)"
@@ -134,9 +134,9 @@ build_script:
         cmake --build . -j $env:EVENT_BUILD_PARALLEL -- /nologo /verbosity:minimal
         if ($LastExitCode -ne 0) { $host.SetShouldExit($LastExitCode)  }
         if ($env:TEST_EXPORT -eq 'STATIC') {
-          &$env:PYTHON3 ../test-export/test-export.py static
+          &$env:PYTHON3 ../test-export/test-export.py static du 2>&1 | %{ "$_" }
         } elseif ($env:TEST_EXPORT -eq 'SHARED') {
-          &$env:PYTHON3 ../test-export/test-export.py shared
+          &$env:PYTHON3 ../test-export/test-export.py shared du 2>&1 | %{ "$_" }
         } else {
           ctest --output-on-failure -j $env:EVENT_TESTS_PARALLEL
         }
