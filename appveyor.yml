@@ -134,11 +134,9 @@ build_script:
         cmake --build . -j $env:EVENT_BUILD_PARALLEL -- /nologo /verbosity:minimal
         if ($LastExitCode -ne 0) { $host.SetShouldExit($LastExitCode)  }
         if ($env:TEST_EXPORT -eq 'STATIC') {
-          &$env:PYTHON3 ../test-export/test-export.py static 2> null}
-          if ($LastExitCode -ne 0) { $host.SetShouldExit($LastExitCode)  }
+          &$env:PYTHON3 ../test-export/test-export.py static
         } elseif ($env:TEST_EXPORT -eq 'SHARED') {
-          &$env:PYTHON3 ../test-export/test-export.py shared }
-          if ($LastExitCode -ne 0) { $host.SetShouldExit($LastExitCode)  }
+          &$env:PYTHON3 ../test-export/test-export.py shared
         } else {
           ctest --output-on-failure -j $env:EVENT_TESTS_PARALLEL
         }
