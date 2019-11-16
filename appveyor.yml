@@ -92,7 +92,7 @@ init:
 
 build_script:
   - ps: $PIPENV_QUIET="true"
-  - ps: ->
+  - ps: >-
       if ($env:EVENT_BUILD_METHOD -eq 'autotools') {
         $env:PATH="$env:MPATH;$env:OPENSSL_ROOT/bin;$env:PATH"
         $env:LDFLAGS="-L$($env:OPENSSL_ROOT)/lib -L$($env:OPENSSL_ROOT)"
