@@ -136,7 +136,7 @@ build_script:
         if ($env:TEST_EXPORT -eq 'STATIC') {
           &$env:PYTHON3 ../test-export/test-export.py static du 2>&1 | %{ "$_" }
         } elseif ($env:TEST_EXPORT -eq 'SHARED') {
-          &$env:PYTHON3 ../test-export/test-export.py shared du 2>&1 | %{ "$_" }
+          &$env:PYTHON3 ../test-export/test-export.py shared du 2>null}
         } else {
           ctest --output-on-failure -j $env:EVENT_TESTS_PARALLEL
         }
