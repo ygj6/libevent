@@ -8,7 +8,7 @@ osx_image: xcode10.1
 
 branches:
   except:
-#    - /.*appveyor.*/
+  #  - /.*appveyor.*/
     - /.*win.*/
     - /.*mingw.*/
     - /.*freebsd.*/
@@ -76,6 +76,18 @@ language: c
 # since we just use default compiler.
 compiler: gcc
 
+cache:
+  - os: osx
+    directories:
+      - /usr/local/Cellar/openssl
+      - /usr/local/opt/openssl
+      - /usr/local/Cellar/lcov
+      - /usr/local/opt/lcov
+      - /usr/local/Cellar/libtool
+      - /usr/local/opt/libtool
+      - /usr/local/Cellar/gcc
+      - /usr/local/opt/gcc
+
 before_install:
   - if [ -n "$COVERALLS" ]; then
       pip install --user cpp-coveralls;
@@ -83,14 +95,11 @@ before_install:
   - export JOBS=20
   - export TIMEOUT=50
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      export OPENSSL_ROOT=$(echo /usr/local/Cellar/openssl/*);
-      export
-        CMAKE_INCLUDE_PATH=$OPENSSL_ROOT/include
-        CMAKE_LIBRARY_PATH=$OPENSSL_ROOT/lib;
-      export
-        CFLAGS=-I$CMAKE_INCLUDE_PATH
-        LDFLAGS=-L$CMAKE_LIBRARY_PATH;
-
+      test -d /usr/local/opt/openssl/lib || { rmdir /usr/local/opt/openssl; brew install openssl; };
+      test -d /usr/local/opt/lcov/bin || { rmdir /usr/local/opt/lcov; brew install lcov; };
+      test -d /usr/local/opt/libtool/bin || { rmdir /usr/local/opt/libtool; brew install libtool; };
+      test -d /usr/local/opt/gcc/bin || { rmdir /usr/local/opt/gcc; brew install gcc; };
+      export OPENSSL_ROOT_DIR=/usr/local/opt/openssl;
       export JOBS=1;
     fi
 
