@@ -26,14 +26,8 @@ jobs:
       matrix:
         os: [ubuntu-18.04]
         EVENT_MATRIX:
-          - NONE
-          - DISABLE_OPENSSL
-          - DISABLE_THREAD_SUPPORT
-          - DISABLE_DEBUG_MODE
-          - DISABLE_MM_REPLACEMENT
-          - COMPILER_CLANG
-          - TEST_EXPORT_STATIC
-          - TEST_EXPORT_SHARED
+          - ASAN
+          - UBSAN
 
     steps:
       - uses: actions/checkout@v2.0.0
@@ -68,6 +62,14 @@ jobs:
           elif [ "${{ matrix.EVENT_MATRIX }}" == "TEST_EXPORT_SHARED" ]; then
             EVENT_CMAKE_OPTIONS="-DEVENT__LIBRARY_TYPE=SHARED -DEVENT__DISABLE_TESTS=ON -DEVENT__DISABLE_SAMPLES=ON"
 
+          elif [ "${{ matrix.EVENT_MATRIX }}" == "ASAN" ]; then
+            EVENT_CMAKE_OPTIONS="-DEVENT__DISABLE_REGRESS=ON -DEVENT__DISABLE_SAMPLES=ON"
+            SAN_FLAGS="-fno-omit-frame-pointer -fsanitize=address -g"
+
+          elif [ "${{ matrix.EVENT_MATRIX }}" == "UBSAN" ]; then
+            EVENT_CMAKE_OPTIONS="-DEVENT__DISABLE_REGRESS=ON -DEVENT__DISABLE_SAMPLES=ON"
+            SAN_FLAGS="-fsanitize=undefined -g"
+
           else
             EVENT_CMAKE_OPTIONS=""
           fi
@@ -79,14 +81,15 @@ jobs:
           mkdir -p build
           cd build
           echo [cmake]: cmake .. $EVENT_CMAKE_OPTIONS
-          cmake .. $EVENT_CMAKE_OPTIONS
+          CFLAGS="$SAN_FLAGS" cmake .. $EVENT_CMAKE_OPTIONS
           cmake --build .
           if [ "${{ matrix.EVENT_MATRIX }}" == "TEST_EXPORT_STATIC" ]; then
             sudo python3 ../test-export/test-export.py static
           elif [ "${{ matrix.EVENT_MATRIX }}" == "TEST_EXPORT_SHARED" ]; then
             sudo python3 ../test-export/test-export.py shared
           else
-            cmake --build . --target verify
+            # cmake --build . --target verify
+            ctest -V
           fi
 
       - uses: actions/upload-artifact@v1
@@ -102,12 +105,8 @@ jobs:
       matrix:
         os: [ubuntu-18.04]
         EVENT_MATRIX:
-          - NONE
-          - DISABLE_OPENSSL
-          - DISABLE_THREAD_SUPPORT
-          - DISABLE_DEBUG_MODE
-          - DISABLE_MM_REPLACEMENT
-          - COMPILER_CLANG
+          - ASAN
+          - UBSAN
 
     steps:
       - uses: actions/checkout@v2.0.0
@@ -136,6 +135,14 @@ jobs:
             EVENT_CONFIGURE_OPTIONS=""
             export CC=clang
 
+          elif [ "${{ matrix.EVENT_MATRIX }}" == "ASAN" ]; then
+            EVENT_CONFIGURE_OPTIONS="--disable-samples"
+            SAN_FLAGS="-fno-omit-frame-pointer -fsanitize=address -g"
+
+          elif [ "${{ matrix.EVENT_MATRIX }}" == "UBSAN" ]; then
+            EVENT_CONFIGURE_OPTIONS="--disable-samples"
+            SAN_FLAGS="-fsanitize=undefined -g"
+
           else
             EVENT_CONFIGURE_OPTIONS=""
           fi
@@ -145,8 +152,8 @@ jobs:
           ./autogen.sh
           mkdir -p build
           cd build
-          echo [configure]: ../configure $EVENT_CONFIGURE_OPTIONS
-          ../configure $EVENT_CONFIGURE_OPTIONS
+          echo [configure]: CFLAGS="$SAN_FLAGS" ../configure $EVENT_CONFIGURE_OPTIONS
+          CFLAGS="$SAN_FLAGS" ../configure $EVENT_CONFIGURE_OPTIONS
           make
           make -j $JOBS verify
 
