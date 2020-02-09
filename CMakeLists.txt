@@ -1217,11 +1217,11 @@ if (NOT EVENT__DISABLE_TESTS)
     set(BACKENDS "")
 
     if (EVENT__HAVE_EPOLL)
-        list(APPEND BACKENDS EPOLL)
+        # list(APPEND BACKENDS EPOLL)
     endif()
 
     if (EVENT__HAVE_SELECT)
-        list(APPEND BACKENDS SELECT)
+        # list(APPEND BACKENDS SELECT)
     endif()
 
     if (EVENT__HAVE_POLL)

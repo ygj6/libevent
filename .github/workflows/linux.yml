@@ -26,11 +26,14 @@ jobs:
       matrix:
         os: [ubuntu-18.04]
         EVENT_MATRIX:
-          - ASAN
-          - UBSAN
+          - CDASH
 
     steps:
       - uses: actions/checkout@v2.0.0
+
+      - name: Install valgrind
+        run: sudo apt-get install valgrind
+
       - name: Cache Build
         uses: actions/cache@v1.1.0
         with:
@@ -69,6 +72,10 @@ jobs:
           elif [ "${{ matrix.EVENT_MATRIX }}" == "UBSAN" ]; then
             EVENT_CMAKE_OPTIONS="-DEVENT__DISABLE_REGRESS=ON -DEVENT__DISABLE_SAMPLES=ON"
             SAN_FLAGS="-fsanitize=undefined -g"
+
+          elif [ "${{ matrix.EVENT_MATRIX }}" == "CDASH" ]; then
+            ctest -S cmake/memcheck.cmake -V
+            exit 0
 
           else
             EVENT_CMAKE_OPTIONS=""
