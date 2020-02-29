@@ -38,7 +38,7 @@ jobs:
         uses: actions/cache@v1.1.0
         with:
           path: build
-          key: ${{ matrix.os }}-cmake-${{ matrix.EVENT_MATRIX }}
+          key: ${{ matrix.os }}-cmake-${{ matrix.EVENT_MATRIX }}-0229
 
       - name: Build And Test
         shell: bash
