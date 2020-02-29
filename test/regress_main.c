@@ -429,21 +429,21 @@ struct testcase_t thread_testcases[] = {
 #endif
 
 struct testgroup_t testgroups[] = {
-	{ "main/", main_testcases },
-	{ "heap/", minheap_testcases },
-	{ "et/", edgetriggered_testcases },
-	{ "finalize/", finalize_testcases },
+	// { "main/", main_testcases },
+	// { "heap/", minheap_testcases },
+	// { "et/", edgetriggered_testcases },
+	// { "finalize/", finalize_testcases },
 	{ "evbuffer/", evbuffer_testcases },
-	{ "signal/", signal_testcases },
-	{ "util/", util_testcases },
-	{ "bufferevent/", bufferevent_testcases },
-	{ "http/", http_testcases },
-	{ "dns/", dns_testcases },
-	{ "evtag/", evtag_testcases },
-	{ "rpc/", rpc_testcases },
-	{ "thread/", thread_testcases },
-	{ "listener/", listener_testcases },
-	{ "watch/", watch_testcases },
+	// { "signal/", signal_testcases },
+	// { "util/", util_testcases },
+	// { "bufferevent/", bufferevent_testcases },
+	// { "http/", http_testcases },
+	// { "dns/", dns_testcases },
+	// { "evtag/", evtag_testcases },
+	// { "rpc/", rpc_testcases },
+	// { "thread/", thread_testcases },
+	// { "listener/", listener_testcases },
+	// { "watch/", watch_testcases },
 #ifdef _WIN32
 	{ "iocp/", iocp_testcases },
 	{ "iocp/bufferevent/", bufferevent_iocp_testcases },
@@ -451,7 +451,7 @@ struct testgroup_t testgroups[] = {
 	{ "iocp/http/", http_iocp_testcases },
 #endif
 #ifdef EVENT__HAVE_OPENSSL
-	{ "ssl/", ssl_testcases },
+	// { "ssl/", ssl_testcases },
 #endif
 	END_OF_GROUPS
 };
