@@ -3226,7 +3226,6 @@ evbuffer_add_file_segment(struct evbuffer *buf,
 			}
 		}
 	}
-	++seg->refcnt;
 	EVLOCK_UNLOCK(seg->lock, 0);
 
 	if (buf->freeze_end)
@@ -3290,6 +3289,9 @@ evbuffer_add_file_segment(struct evbuffer *buf,
 		chain->off = length;
 	}
 
+	EVLOCK_LOCK(seg->lock, 0);
+	++seg->refcnt;
+	EVLOCK_UNLOCK(seg->lock, 0);
 	extra->segment = seg;
 	buf->n_add_for_cb += length;
 	evbuffer_chain_insert(buf, chain);
