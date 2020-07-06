@@ -1,0 +1,33 @@
+language: c
+env:
+  global:
+    # COVERITY_SCAN_TOKEN
+    # ** specific to your project **
+    - secure: "UUB2Rq7C+MO/AU5B8Y+561topG6KJKg6EYSw5S/ZwiPgRFbC2xRBBCVUMQwK8fdrPAewuYzmF/MFcN7mgO5T3aaKOWIz1nYomvpmeESou30LPyajtcbxr8zv46G4fI5hHhANResGYmjtGiKjCTYSiAgE+Ga6TWEOKwCek1AtX7NelBiMXKyBc4Ha0gSh4s6Z+j2cIH+WxPcN3RhUM2WwhHoj0PyKxUxfR4nIucvTHrZwlD7W9oL6j7pjvRDFqCKfrfUADkCdQx8k99Xp3/N5vAir0aoehirAT/9xfdtGkkJJlcmZd/4pQkf8XZExgCrIOHeJ8ezUsjCTOc8PsqwHsLm5vqcSWjHz/lyKjm59EFc4t8hJGzbos/Qa54wRwU8kTNbcNP1/C1oJWhAcSqGtFKtPRPKb/LhlpOxIsI2Ijq/ZqMLtsluI/hdCwxyeUI2j51KJIIRGi7mTNahgowo8JNqVXZdJuC4VI4c42RJx/XjJdoMOyr8yfMnDbHFKH0Tey8DSk8sM0/k2W8g3/8mWaZC7OjmGW41WLuf2YA21PbsgagpbsUUx7wauFa4Uv68m/nAXcaiIB5NhGu/tD4Jkj2vwblhdAYqfT/dzv/gX6AULVOsV4ErDqhL6ZeFoNI4B5yDz48RgR8Cp1zPTnbY35ylhvqOkaM2MBzTxZRiXu8I="
+addons:
+  coverity_scan:
+
+    # GitHub project metadata
+    # ** specific to your project **
+    project:
+      name: ygj6/libevent
+      version: 2.1.0
+      description: My Fork Project
+
+    # Where email notification of build analysis results will be sent
+    notification_email: yuangongji@foxmail.com
+
+    # Commands to prepare for build_command
+    # ** likely specific to your build **
+    build_command_prepend: mkdir build && cd build && cmake ..
+
+    # The command that will be added as an argument to "cov-build" to compile your project for analysis,
+    # ** likely specific to your build **
+    build_command: make -j10
+
+    # Pattern to match selecting branches that will run analysis. We recommend leaving this set to 'coverity_scan'.
+    # Take care in resource usage, and consider the build frequency allowances per
+    #   https://scan.coverity.com/faq#frequency
+    branch_pattern: coverity
+    
+script: if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then make ; fi
