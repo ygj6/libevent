@@ -37,14 +37,18 @@ jobs:
           path: build
           key: ${{ matrix.os }}-${{ matrix.EVENT_MATRIX }}-v4
 
-      - name: Prepare vcpkg
-        uses: lukka/run-vcpkg@v2
-        id: runvcpkg
+      - name: Cache vcpkg
+        id: cache-vcpkg
+        uses: actions/cache@v2
         with:
-          vcpkgArguments: zlib:x64-windows openssl:x64-windows mbedtls:x64-windows
-          vcpkgDirectory: ${{ runner.workspace }}/vcpkg/
-          vcpkgGitCommitId: 8e76503a769e153dad8f4e7b2c95a152bb35edaa
-          vcpkgTriplet: x64-windows
+          path: C:/vcpkg/installed/x64-windows
+          key: ${{ matrix.os }}-vcpkg
+      - name: Build dependencies
+        if: steps.cache-vcpkg.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          vcpkg update
+          vcpkg install zlib:x64-windows openssl:x64-windows mbedtls:x64-windows
 
       - name: Build And Test
         shell: powershell
